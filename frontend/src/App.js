@@ -3,12 +3,21 @@ import {
   Router,
   Route
 } from 'react-router-dom';
+import * as ReadableAPI from './utils/ReadableAPI'
 import Home from './containers/Home';
 import Category from './containers/Category';
 import Navbar from './components/Navbar';
 import CategoriesList from './components/CategoriesList'
 
 class App extends Component {
+  
+  componentDidMount() {
+    ReadableAPI.getAllPosts().then((posts) => {
+      console.log('posts:', posts)
+    })
+
+  }
+
   render() {
     return (
       <div className="App">

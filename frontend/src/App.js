@@ -3,7 +3,7 @@ import {
   Router,
   Route
 } from 'react-router-dom';
-import * as ReadableAPI from './utils/ReadableAPI'
+import * as ReadableAPI from './utils/api'
 import Home from './containers/Home';
 import Category from './containers/Category';
 import Navbar from './components/Navbar';

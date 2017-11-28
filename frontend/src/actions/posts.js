@@ -1,5 +1,11 @@
 import * as ReadableAPI from './utils/api'
 
+//Posts By Category
+export const FETCH_POSTS_CATEGORY = 'FETCH_POSTS_CATEGORY'
+export const FETCH_POSTS_CATEGORY_SUCCESS = 'FETCH_POSTS_CATEGORY_SUCCESS'
+export const FETCH_POSTS_CATEGORY_FAILURE = 'FETCH_POSTS_CATEGORY_FAILURE'
+export const FETCH_POSTS_CATEGORY_RESET = 'FETCH_POSTS_CATEGORY_RESET'
+
 //Post List 
 export const FETCH_POSTS = 'FETCH_POSTS'
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS'
@@ -36,7 +42,28 @@ export const VOTE_POST_SUCCESS = 'VOTE_POST_SUCCESS'
 export const VOTE_POST_FAILURE = 'VOTE_POST_FAILURE'
 export const VOTE_POST_RESET = 'VOTE_POST_RESET'
 
+//Posts Category
+export function getPostsCategory(Category) {
+    const request = ReadableAPI.fetchCategoryPosts(category)
+    return {
+        type: FETCH_POSTS_CATEGORY,
+        payload: request,
+    }
+}
 
+export function getPostsCategory(posts) {
+    return {
+        type: FETCH_POSTS_CATEGORY_SUCCESS,
+        payload: posts,
+    }
+}
+
+export function getPostsCategoryFailure() {
+    return {
+        type: FETCH_POSTS_CATEGORY_FAILURE,
+        payload: posts,
+    }
+}
 //Post List Action Creator
 export function fetchPosts() {
     const request = ReadableAPI.fetchPosts()

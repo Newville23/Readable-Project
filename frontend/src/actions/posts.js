@@ -65,14 +65,24 @@ export const VOTE_POST_RESET = 'VOTE_POST_RESET'
 //     }
 // }
 //Post List Action Creator
+// export function fetchPosts() {
+//     const request = ReadableAPI.fetchAllPosts()
+//     return {
+//         type: FETCH_POSTS,
+//         payload: request,
+//     }
+// }
 export function fetchPosts() {
     const request = ReadableAPI.fetchAllPosts()
-    return {
-        type: FETCH_POSTS,
-        payload: request,
+    return (dispatch) => {
+        request.then((response) => {
+            dispatch({
+                type: FETCH_POSTS,
+                payload: response,
+            })
+        })
     }
 }
-
 export function fetchPostsSuccess(posts) {
     return{
         type: FETCH_POSTS_SUCCESS,

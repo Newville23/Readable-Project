@@ -1,28 +1,52 @@
 import {
-    FETCH_POST,
-    FETCH_POSTS,
-    VOTE_POST,
-    CREATE_POST,
-    DELETE_POST,
-    EDIT_POST
-} from '../actions/posts'
+    FETCH_POSTS_CATEGORY, FETCH_POSTS_CATEGORY_SUCCESS, FETCH_POSTS_CATEGORY_FAILURE, FETCH_POSTS_CATEGORY_RESET, 
+    FETCH_POSTS, FETCH_POSTS_SUCCESS, FETCH_POSTS_FAILURE, SELECT_POSTS_RESET,
+    FETCH_POST, FETCH_POST_SUCCESS, FETCH_POST_FAILURE, SELECT_POST_RESET,
+    CREATE_POST, CREATE_POST_SUCCESS, CREATE_POST_FAILURE, CREATE_POST_RESET,
+    DELETE_POST, DELETE_POST_SUCCCESS, DELETE_POST_FAILURE, DELETE_POST_RESET,
+    EDIT_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE, EDIT_POST_RESET,
+    VOTE_POST, VOTE_POST_SUCCESS, VOTE_POST_FAILURE, VOTE_POST_RESET,
+} from '../actions/posts';
 
-const post = ( state = [], action ) => {
+const INITIAL_STATE = {
+    byId: {}, error: null, loading: false, allIds: [],
+    // newPost: {post: null, error: null, loading: false},
+    // activePost: {post: null, error: null, loading: false},
+    // deletePost: {post: null, error: null, loading: false}, 
+};
+
+const posts = ( state = INITIAL_STATE, action ) => {
+    let error;
     const { payload } = action
     switch (action.type) {
-        case FETCH_POST:
-
         case FETCH_POSTS:
-
-        case VOTE_POST:
-
-        case CREATE_POST:
-            
-        case DELETE_POST:
-        
-        case EDIT_POST:
-    
+            return {
+                ...state,
+                postList: {
+                    ...state.postList,
+                    loading: true,
+                }
+            }
+        case FETCH_POSTS_SUCCESS:
+            return {
+                ...state,
+                postList: {
+                    ...state.postList,
+                    posts: payload,
+                    loading: false,
+                }
+            }   
+        case FETCH_POSTS_FAILURE:
+            return {
+                ...state,
+                postList: {
+                    posts: null,
+                    error: payload
+                }
+            }
         default:
             return state
     }
 }
+
+export default posts;

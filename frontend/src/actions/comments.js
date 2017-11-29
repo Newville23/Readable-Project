@@ -1,4 +1,4 @@
-import ReadableAPI from './utils/api';
+import * as ReadableAPI from '../utils/api';
 
 //COMMENT List 
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
@@ -104,7 +104,7 @@ export function  editComment(commentId) {
     const request = ReadableAPI.putComment
     return {
         type: EDIT_COMMENT_POST,
-        payload: requesst,
+        payload: request,
     } 
 }
 

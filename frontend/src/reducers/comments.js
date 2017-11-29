@@ -1,0 +1,17 @@
+import {
+    FETCH_COMMENTS, FETCH_COMMENTS_SUCCESS, FETCH_COMMENTS_FAILURE,
+    CREATE_COMMENT, CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAILURE,
+    DELETE_COMMENT, DELETE_COMMENT_SUCCCESS, DELETE_COMMENT_FAILURE,
+    EDIT_COMMENT_POST, EDIT_COMMENT_POST_SUCCESS, EDIT_COMMENT_POST_FAILURE,
+    VOTE_COMMENT_POST, VOTE_COMMENT_POST_SUCCESS, VOTE_COMMENT_POST_FAILURE,
+} from '../actions/comments';
+
+const INITIAL_STATE = {
+    byId: {}, error: null, loading: false, allIds: [],
+};  
+
+const comments = (state = INITIAL_STATE, action ) => {
+    return state;
+}
+
+export default comments; 

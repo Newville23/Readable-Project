@@ -1,4 +1,4 @@
-import * as ReadableAPI from './utils/api'
+import * as ReadableAPI from '../utils/api'
 
 //Posts By Category
 export const FETCH_POSTS_CATEGORY = 'FETCH_POSTS_CATEGORY'
@@ -42,31 +42,31 @@ export const VOTE_POST_SUCCESS = 'VOTE_POST_SUCCESS'
 export const VOTE_POST_FAILURE = 'VOTE_POST_FAILURE'
 export const VOTE_POST_RESET = 'VOTE_POST_RESET'
 
-//Posts Category
-export function getPostsCategory(Category) {
-    const request = ReadableAPI.fetchCategoryPosts(category)
-    return {
-        type: FETCH_POSTS_CATEGORY,
-        payload: request,
-    }
-}
+// //Posts Category
+// export function getPostsCategory(Category) {
+//     const request = ReadableAPI.fetchCategoryPosts(category)
+//     return {
+//         type: FETCH_POSTS_CATEGORY,
+//         payload: request,
+//     }
+// }
 
-export function getPostsCategory(posts) {
-    return {
-        type: FETCH_POSTS_CATEGORY_SUCCESS,
-        payload: posts,
-    }
-}
+// export function getPostsCategorySuccess(posts) {
+//     return {
+//         type: FETCH_POSTS_CATEGORY_SUCCESS,
+//         payload: posts,
+//     }
+// }
 
-export function getPostsCategoryFailure() {
-    return {
-        type: FETCH_POSTS_CATEGORY_FAILURE,
-        payload: posts,
-    }
-}
+// export function getPostsCategoryFailure() {
+//     return {
+//         type: FETCH_POSTS_CATEGORY_FAILURE,
+//         payload: posts,
+//     }
+// }
 //Post List Action Creator
 export function fetchPosts() {
-    const request = ReadableAPI.fetchPosts()
+    const request = ReadableAPI.fetchAllPosts()
     return {
         type: FETCH_POSTS,
         payload: request,
@@ -87,118 +87,118 @@ export function fetchPostsFailure(err) {
     }
 }
 
-//Post Details Action Creator
-export function fetchPost(postId) {
-    const request = ReadableAPI.fetchPost(postId)
-    return {
-        type: FETCH_POST,
-        payload: request,
-    }
-}
+// //Post Details Action Creator
+// export function fetchPost(postId) {
+//     const request = ReadableAPI.fetchPost(postId)
+//     return {
+//         type: FETCH_POST,
+//         payload: request,
+//     }
+// }
 
-export function fetchPostSuccess(post) {
-    return {
-        type: FETCH_POST_SUCCESS,
-        payload: post,
-    }
-}
+// export function fetchPostSuccess(post) {
+//     return {
+//         type: FETCH_POST_SUCCESS,
+//         payload: post,
+//     }
+// }
 
-export function fetchPostFailure(err) {
-    return {
-        type: FETCH_POST_FAILURE,
-        payload: err,
-    }
-}
+// export function fetchPostFailure(err) {
+//     return {
+//         type: FETCH_POST_FAILURE,
+//         payload: err,
+//     }
+// }
 
-//Create Post Action Creator
-export function createPost(option) {
-    option.id = postId
-    option.delete = false
-    option.timeStamp = Date.now()
-    const request = ReadableAPI.addPost(option)
-    return {
-        type: CREATE_POST,
-        payload: request,
-    }
-}
+// //Create Post Action Creator
+// export function createPost(option) {
+//     option.id = postId
+//     option.delete = false
+//     option.timeStamp = Date.now()
+//     const request = ReadableAPI.addPost(option)
+//     return {
+//         type: CREATE_POST,
+//         payload: request,
+//     }
+// }
 
-export function createPostSuccess(newPost) {
-    return {
-        type: CREATE_POST_SUCCESS,
-        payload: newPost,
-    }
-}
+// export function createPostSuccess(newPost) {
+//     return {
+//         type: CREATE_POST_SUCCESS,
+//         payload: newPost,
+//     }
+// }
 
-export function createPostFailure(err) {
-    return {
-        type: CREATE_POST_FAILURE,
-        payload: err,
-    }
-}
+// export function createPostFailure(err) {
+//     return {
+//         type: CREATE_POST_FAILURE,
+//         payload: err,
+//     }
+// }
 
-//Delete Post Action Creator
-export function deletePost(postId) {
-    const request = ReadableAPI.deletePost(postId)
-    return {
-        type: DELETE_POST,
-        payload: request
-    }
-}
+// //Delete Post Action Creator
+// export function deletePost(postId) {
+//     const request = ReadableAPI.deletePost(postId)
+//     return {
+//         type: DELETE_POST,
+//         payload: request
+//     }
+// }
 
-export function deletePostSuccess(deletedPost) {
-    return {
-        type: DELETE_POST_SUCCCESS,
-        payload: deletedPost
-    }
-}
+// export function deletePostSuccess(deletedPost) {
+//     return {
+//         type: DELETE_POST_SUCCCESS,
+//         payload: deletedPost
+//     }
+// }
 
-export function deletePostFailure(err) {
-    return {
-        type: DELETE_POST_FAILURE,
-        payload: err
-    }
-}
-//Edit Post Action Creator
-export function editPost(option, postId) {
-    const request = ReadableAPI.putPost(option, postId)
-    return {
-        type: EDIT_POST,
-        payload: request,
-    }
-}
+// export function deletePostFailure(err) {
+//     return {
+//         type: DELETE_POST_FAILURE,
+//         payload: err
+//     }
+// }
+// //Edit Post Action Creator
+// export function editPost(option, postId) {
+//     const request = ReadableAPI.putPost(option, postId)
+//     return {
+//         type: EDIT_POST,
+//         payload: request,
+//     }
+// }
 
-export function editPostSuccess(editedPost) {
-    return {
-        type: EDIT_POST_SUCCESS,
-        payload: editedPost,
-    }
-} 
+// export function editPostSuccess(editedPost) {
+//     return {
+//         type: EDIT_POST_SUCCESS,
+//         payload: editedPost,
+//     }
+// } 
 
-export function editPostFailure(err) {
-    return {
-        type: EDIT_POST_FAILURE,
-        payload: err
-    }
-}
-//Vote Post Action Creator
-export function votePost(option, postId) {
-    const request = ReadableAPI.votePost(option, postId)
-    return {
-        type: VOTE_POST,
-        payload: request,
-    }
-}
+// export function editPostFailure(err) {
+//     return {
+//         type: EDIT_POST_FAILURE,
+//         payload: err
+//     }
+// }
+// //Vote Post Action Creator
+// export function votePost(option, postId) {
+//     const request = ReadableAPI.votePost(option, postId)
+//     return {
+//         type: VOTE_POST,
+//         payload: request,
+//     }
+// }
 
-export function votePostSuccess(votedPost) {
-    return {
-        type: VOTE_POST_SUCCESS,
-        payload: votedPost,
-    }
-}
+// export function votePostSuccess(votedPost) {
+//     return {
+//         type: VOTE_POST_SUCCESS,
+//         payload: votedPost,
+//     }
+// }
 
-export function votePostFailure(err) {
-    return {
-        type: VOTE_POST_FAILURE,
-        payload: err,
-    }
-}
+// export function votePostFailure(err) {
+//     return {
+//         type: VOTE_POST_FAILURE,
+//         payload: err,
+//     }
+// }

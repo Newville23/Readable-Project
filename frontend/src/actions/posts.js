@@ -76,10 +76,9 @@ export function fetchPosts() {
     const request = ReadableAPI.fetchAllPosts()
     return (dispatch) => {
         request.then((response) => {
-            dispatch({
-                type: FETCH_POSTS,
-                payload: response,
-            })
+            !response.error
+            ? dispatch({type:FETCH_POSTS_SUCCESS, payload: response.data,})
+            : dispatch({type: FETCH_POSTS_FAILURE, payload: response.data,});
         })
     }
 }

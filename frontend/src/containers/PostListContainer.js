@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchPosts, fetchPostsSuccess, fetchPostsFailure } from '../actions/posts';
+import { fetchPosts } from '../actions/posts';
 import PostList from '../components/PostListPresentational';
 
 const mapStateToProps = ({posts}) => {
@@ -7,17 +7,6 @@ const mapStateToProps = ({posts}) => {
         posts
     };
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchPosts: () => {
-            dispatch(fetchPosts()).then((response) => {
-                !response.error 
-                ? dispatch(fetchPostsSuccess(response.payload.data))
-                : dispatch(fetchPostsFailure(response.payload.data));
-            });
-        }
-    }
-}
+const mapDispatchToProps = (dispatch) => fetchPosts;
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

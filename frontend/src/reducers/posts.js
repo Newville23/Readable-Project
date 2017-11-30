@@ -15,6 +15,21 @@ const INITIAL_STATE = {
     // deletePost: {post: null, error: null, loading: false}, 
 };
 
+const postNormalization = (state, action) => {
+    const { payload } = action;
+    const {byId, allIds} = state;
+    const postById = payload.reduce((tally, current) => {
+        tally[current.id] = { ...current }
+        return tally;
+    }, {});
+    const postAllIds = payload.map((post) => post.id );
+    return {
+        ...state,
+        byId : postById,
+        allIds : postAllIds
+    }
+}
+
 const posts = ( state = INITIAL_STATE, action ) => {
     let error;
     const { payload } = action
@@ -28,14 +43,7 @@ const posts = ( state = INITIAL_STATE, action ) => {
                 }
             }
         case FETCH_POSTS_SUCCESS:
-            return {
-                ...state,
-                postList: {
-                    ...state.postList,
-                    posts: payload,
-                    loading: false,
-                }
-            }   
+            return postNormalization(state, action);
         case FETCH_POSTS_FAILURE:
             return {
                 ...state,

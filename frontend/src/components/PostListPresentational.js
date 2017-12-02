@@ -10,8 +10,8 @@ class PostList extends Component {
             return (
                 <li key={byId[post].id} className="list-group-item">
                     <h3 className="list-group item heading">{byId[post].title}</h3>
-                    <h4>{byId[post].author}</h4>
-                    <h5>{byId[post].voteScore}</h5>
+                    <h4>posted by {byId[post].author}</h4>
+                    <h5>votes {byId[post].voteScore}</h5>
                 </li>
             )
         })

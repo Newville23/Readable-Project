@@ -65,13 +65,6 @@ export const VOTE_POST_RESET = 'VOTE_POST_RESET'
 //     }
 // }
 //Post List Action Creator
-// export function fetchPosts() {
-//     const request = ReadableAPI.fetchAllPosts()
-//     return {
-//         type: FETCH_POSTS,
-//         payload: request,
-//     }
-// }
 export function fetchPosts() {
     const request = ReadableAPI.fetchAllPosts()
     return (dispatch) => {
@@ -83,68 +76,34 @@ export function fetchPosts() {
         })
     }
 }
-export function fetchPostsSuccess(posts) {
-    return{
-        type: FETCH_POSTS_SUCCESS,
-        payload: posts,
+
+//Post Details Action Creator
+export function fetchPost(postId) {
+    const request = ReadableAPI.fetchPost(postId)
+    return (dispatch) => {
+        request.then((response) => {
+            console.log(response)
+            !response.error
+            ? dispatch({type: FETCH_POST_SUCCESS, payload: response,})
+            : dispatch({type: FETCH_POST_FAILURE, payload: response,})
+        })
     }
 }
 
-export function fetchPostsFailure(err) {
-    return {
-        type: FETCH_POSTS_FAILURE,
-        payload: err,
+//Create Post Action Creator
+export function createPost(option) {
+    option.id = postId
+    option.delete = false
+    option.timeStamp = Date.now()
+    const request = ReadableAPI.addPost(option)
+    return (dispatch) => {
+        request.then((response) => {
+            !response.error
+            ? dispatch({type: CREATE_POST, payload: response,})
+            : dispatch({type: CREATE_POST_FAILURE, payload: response,})
+        })
     }
 }
-
-// //Post Details Action Creator
-// export function fetchPost(postId) {
-//     const request = ReadableAPI.fetchPost(postId)
-//     return {
-//         type: FETCH_POST,
-//         payload: request,
-//     }
-// }
-
-// export function fetchPostSuccess(post) {
-//     return {
-//         type: FETCH_POST_SUCCESS,
-//         payload: post,
-//     }
-// }
-
-// export function fetchPostFailure(err) {
-//     return {
-//         type: FETCH_POST_FAILURE,
-//         payload: err,
-//     }
-// }
-
-// //Create Post Action Creator
-// export function createPost(option) {
-//     option.id = postId
-//     option.delete = false
-//     option.timeStamp = Date.now()
-//     const request = ReadableAPI.addPost(option)
-//     return {
-//         type: CREATE_POST,
-//         payload: request,
-//     }
-// }
-
-// export function createPostSuccess(newPost) {
-//     return {
-//         type: CREATE_POST_SUCCESS,
-//         payload: newPost,
-//     }
-// }
-
-// export function createPostFailure(err) {
-//     return {
-//         type: CREATE_POST_FAILURE,
-//         payload: err,
-//     }
-// }
 
 // //Delete Post Action Creator
 // export function deletePost(postId) {

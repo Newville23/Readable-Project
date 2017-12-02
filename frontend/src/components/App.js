@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Link,
   Router,
   Route
 } from 'react-router-dom';
@@ -12,21 +13,22 @@ import CategoriesList from './CategoriesList';
 import AppBar from 'material-ui/AppBar';
 
 class App extends Component {
-  
   componentDidMount() {
-    ReadableAPI.fetchAllPosts().then((posts) => {
-      console.log('posts:', posts)
-    })
-
+    
   }
 
   render() {
     return (
       <MuiThemeProvider>
         <div className="App">
-            <AppBar title="Redeable" />
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/:category" component={Home}/>
+            <AppBar 
+              title={ <Link to="/"> Readable </Link>}
+              showMenuIconButton={false} 
+            />
+            <div className="container">
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/:category" component={Home}/>
+            </div>
         </div>
       </MuiThemeProvider>
     );

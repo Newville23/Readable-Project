@@ -1,5 +1,5 @@
-import * as ReadableAPI from '../utils/api'
-
+import * as ReadableAPI from '../utils/api';
+import cuid from 'cuid';
 //Posts By Category
 export const FETCH_POSTS_CATEGORY = 'FETCH_POSTS_CATEGORY'
 export const FETCH_POSTS_CATEGORY_SUCCESS = 'FETCH_POSTS_CATEGORY_SUCCESS'
@@ -26,7 +26,7 @@ export const CREATE_POST_RESET = 'CREATE_POST_RESET'
 
 //Delete Post
 export const DELETE_POST = 'DELETE_POST'
-export const DELETE_POST_SUCCCESS = 'DELETE_POST_SUCCESS'
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS'
 export const DELETE_POST_FAILURE = 'DELETE_POST_FAILURE'
 export const DELETE_POST_RESET = 'DELETE_POST_RESET'
 
@@ -42,28 +42,22 @@ export const VOTE_POST_SUCCESS = 'VOTE_POST_SUCCESS'
 export const VOTE_POST_FAILURE = 'VOTE_POST_FAILURE'
 export const VOTE_POST_RESET = 'VOTE_POST_RESET'
 
-// //Posts Category
-// export function getPostsCategory(Category) {
-//     const request = ReadableAPI.fetchCategoryPosts(category)
-//     return {
-//         type: FETCH_POSTS_CATEGORY,
-//         payload: request,
-//     }
-// }
+const ERROR_MESSAGE = 'Sorry! we could not finished the action try again'
 
-// export function getPostsCategorySuccess(posts) {
-//     return {
-//         type: FETCH_POSTS_CATEGORY_SUCCESS,
-//         payload: posts,
-//     }
-// }
 
-// export function getPostsCategoryFailure() {
-//     return {
-//         type: FETCH_POSTS_CATEGORY_FAILURE,
-//         payload: posts,
-//     }
-// }
+//Posts Category
+export function getPostsCategory(category) {
+    const request = ReadableAPI.fetchCategoryPosts(category)
+    return (dispatch) => {
+        request.then((response) => {
+            dispatch({type: FETCH_POSTS_CATEGORY_SUCCESS, payload: response})
+        })
+        .catch(() => {
+            dispatch({type: FETCH_POSTS_CATEGORY_FAILURE, payload: ERROR_MESSAGE})
+        })
+    }
+}
+
 //Post List Action Creator
 export function fetchPosts() {
     const request = ReadableAPI.fetchAllPosts()
@@ -92,82 +86,55 @@ export function fetchPost(postId) {
 
 //Create Post Action Creator
 export function createPost(option) {
+    const postId = cuid()
     option.id = postId
-    option.delete = false
-    option.timeStamp = Date.now()
+    option.deleted = false
+    option.timestamp = Date.now()
     const request = ReadableAPI.addPost(option)
     return (dispatch) => {
         request.then((response) => {
             !response.error
-            ? dispatch({type: CREATE_POST, payload: response,})
+            ? dispatch({type: CREATE_POST_SUCCESS, payload: response,})
             : dispatch({type: CREATE_POST_FAILURE, payload: response,})
         })
     }
 }
 
-// //Delete Post Action Creator
-// export function deletePost(postId) {
-//     const request = ReadableAPI.deletePost(postId)
-//     return {
-//         type: DELETE_POST,
-//         payload: request
-//     }
-// }
+//Delete Post Action Creator
+export function deletePost(postId) {
+    const request = ReadableAPI.deletePost(postId);
+    return (dispatch) => {
+        request.then((response) => {
+            dispatch({type: DELETE_POST_SUCCESS, payload: response,});
+        })
+        .catch(() => {
+            dispatch({type: DELETE_POST_FAILURE, payload: ERROR_MESSAGE,});
+        })
+    }
+}
 
-// export function deletePostSuccess(deletedPost) {
-//     return {
-//         type: DELETE_POST_SUCCCESS,
-//         payload: deletedPost
-//     }
-// }
+//Edit Post Action Creator
+export function editPost(option, postId) {
+    const request = ReadableAPI.putPost(option, postId)
+    return (dispatch) => {
+        request.then((response) => {
+            dispatch({type: EDIT_POST_SUCCESS, payload: response});
+        })
+        .catch(() => {
+            dispatch({type: EDIT_POST_FAILURE, payloa: ERROR_MESSAGE })
+        })
+    }
+}
 
-// export function deletePostFailure(err) {
-//     return {
-//         type: DELETE_POST_FAILURE,
-//         payload: err
-//     }
-// }
-// //Edit Post Action Creator
-// export function editPost(option, postId) {
-//     const request = ReadableAPI.putPost(option, postId)
-//     return {
-//         type: EDIT_POST,
-//         payload: request,
-//     }
-// }
-
-// export function editPostSuccess(editedPost) {
-//     return {
-//         type: EDIT_POST_SUCCESS,
-//         payload: editedPost,
-//     }
-// } 
-
-// export function editPostFailure(err) {
-//     return {
-//         type: EDIT_POST_FAILURE,
-//         payload: err
-//     }
-// }
-// //Vote Post Action Creator
-// export function votePost(option, postId) {
-//     const request = ReadableAPI.votePost(option, postId)
-//     return {
-//         type: VOTE_POST,
-//         payload: request,
-//     }
-// }
-
-// export function votePostSuccess(votedPost) {
-//     return {
-//         type: VOTE_POST_SUCCESS,
-//         payload: votedPost,
-//     }
-// }
-
-// export function votePostFailure(err) {
-//     return {
-//         type: VOTE_POST_FAILURE,
-//         payload: err,
-//     }
-// }
+//Vote Post Action Creator
+export function votePost(option, postId) {
+    const request = ReadableAPI.votePost(option, postId)
+    return (dispatch) => {
+        request.then((response) => {
+            dispatch({type: VOTE_POST_SUCCESS, payload: response})
+        })
+        .catch(() => {
+            dispatch({type: VOTE_POST_FAILURE, payload: ERROR_MESSAGE})
+        })
+    }
+}

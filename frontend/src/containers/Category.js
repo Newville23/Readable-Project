@@ -5,11 +5,11 @@ import CategoriesList from '../components/CategoriesList';
 import PostList from '../components/PostListPresentational';
 
 class Category extends Component {
+    
     componentDidMount() {
         const { getPostsCategory, match } = this.props
         getPostsCategory(match.params.category)
     }
-
     render () {
         return(
             <div className="container">

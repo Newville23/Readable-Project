@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   Link,
   Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as ReadableAPI from '../utils/api'
@@ -26,8 +27,10 @@ class App extends Component {
               showMenuIconButton={false} 
             />
             <div className="container">
+            <Switch>
               <Route exact path="/" component={Home}/>
               <Route exact path="/:category" component={Category}/>
+              </Switch>
             </div>
         </div>
       </MuiThemeProvider>

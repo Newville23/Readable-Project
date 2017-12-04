@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/posts';
+import { fetchPosts, getPostsCategory } from '../actions/posts';
 import CategoriesList from '../components/CategoriesList';
 import PostList from '../components/PostListPresentational';
 
@@ -11,7 +11,7 @@ class Home extends Component {
     render () {
         return(
             <div className="container">
-                <CategoriesList/>
+               { <CategoriesList {...this.props}/> }
                 { <PostList {...this.props}/> }
              </div>
         )
@@ -23,4 +23,4 @@ const mapStateToProps = ({posts}) => {
         posts
     };
 }
-export default connect(mapStateToProps,{ fetchPosts })(Home);
+export default connect(mapStateToProps,{ fetchPosts, getPostsCategory })(Home);

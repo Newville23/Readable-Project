@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class PostList extends Component {
-    componentWillMount() {
-        this.props.fetchPosts();
-    }
 
     renderPosts({allIds, byId}) {
         return allIds.map((post) => {
@@ -19,14 +16,11 @@ class PostList extends Component {
 
     render() {
         const { loading, error, ...rest,} = this.props.posts;
-        if(loading) {
-            return <div><h1>Posts</h1><h3>Loading...</h3></div>
-        }
         return (
             <div className="container">
                 <h1>Posts</h1>
                 <ul>
-                    {this.renderPosts({...rest})}
+                    {loading ? <p>LOADING...</p> : this.renderPosts({...rest})}
                 </ul>
             </div>
         )

@@ -27,19 +27,12 @@ class App extends Component {
             />
             <div className="container">
               <Route exact path="/" component={Home}/>
-              <Route exact path="/:category" component={Home}/>
+              <Route exact path="/:category" component={Category}/>
             </div>
         </div>
       </MuiThemeProvider>
     );
   }
 }
-
-const Cat = ({ match }) => (
-  <div>
-    <CategoriesList/>
-    <h2>Category: {match.params.category}</h2>
-  </div>
-)
 
 export default App;

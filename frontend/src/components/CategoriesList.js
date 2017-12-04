@@ -5,13 +5,13 @@ const CategoriesList = () => (
     <div>
         <ul className="categories-list">
             <li>
-                <Link to="/blog">
-                    Blog
+                <Link to="/react">
+                    React
                 </Link>
             </li>
             <li>
-                <Link to="news">
-                    News
+                <Link to="redux">
+                    Redux
                 </Link>
             </li>
             <li>    

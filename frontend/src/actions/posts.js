@@ -49,6 +49,7 @@ const ERROR_MESSAGE = 'Sorry! we could not finished the action try again'
 export function getPostsCategory(category) {
     const request = ReadableAPI.fetchCategoryPosts(category)
     return (dispatch) => {
+        dispatch({type: FETCH_POSTS_CATEGORY})
         request.then((response) => {
             dispatch({type: FETCH_POSTS_CATEGORY_SUCCESS, payload: response})
         })
@@ -62,6 +63,7 @@ export function getPostsCategory(category) {
 export function fetchPosts() {
     const request = ReadableAPI.fetchAllPosts()
     return (dispatch) => {
+        dispatch({type: FETCH_POSTS})
         request.then((response) => {
             console.log(response)
             !response.error

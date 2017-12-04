@@ -25,8 +25,9 @@ const postNormalization = (state, action) => {
     const postAllIds = payload.map((post) => post.id );
     return {
         ...state,
-        byId : postById,
-        allIds : postAllIds
+        byId: postById,
+        allIds: postAllIds,
+        loading: false,
     }
 }
 
@@ -37,21 +38,24 @@ const posts = ( state = INITIAL_STATE, action ) => {
         case FETCH_POSTS:
             return {
                 ...state,
-                postList: {
-                    ...state.postList,
-                    loading: true,
-                }
+                loading: true,
             }
         case FETCH_POSTS_SUCCESS:
             return postNormalization(state, action);
         case FETCH_POSTS_FAILURE:
             return {
                 ...state,
-                postList: {
-                    posts: null,
-                    error: payload
-                }
+                error: payload,
             }
+        case FETCH_POSTS_CATEGORY: 
+            return {
+                ...state,
+                byId: {},
+                loading: true,
+                allIds: [],
+            }
+        case FETCH_POSTS_CATEGORY_SUCCESS:
+            return postNormalization(state, action);     
         default:
             return state
     }

@@ -17,7 +17,7 @@ class PostList extends Component {
     render() {
         const { loading, error, ...rest,} = this.props.posts;
         return (
-            <div className="container">
+            <div>
                 <h1>Posts</h1>
                 <ul>
                     {loading ? <p>LOADING...</p> : this.renderPosts({...rest})}

@@ -10,9 +10,6 @@ import {
 
 const INITIAL_STATE = {
     byId: {}, error: null, loading: false, allIds: [],
-    // newPost: {post: null, error: null, loading: false},
-    // activePost: {post: null, error: null, loading: false},
-    // deletePost: {post: null, error: null, loading: false}, 
 };
 
 const postNormalization = (state, action) => {

@@ -52,7 +52,14 @@ const posts = ( state = INITIAL_STATE, action ) => {
                 allIds: [],
             }
         case FETCH_POSTS_CATEGORY_SUCCESS:
-            return postNormalization(state, action);     
+            return postNormalization(state, action); 
+        case FETCH_POST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case FETCH_POST_SUCCESS:
+            return postNormalization(state, action);         
         default:
             return state
     }

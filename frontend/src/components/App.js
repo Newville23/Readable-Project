@@ -8,9 +8,10 @@ import {
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as ReadableAPI from '../utils/api'
 import './App.css'
+import AppBar from 'material-ui/AppBar';
 import Home from '../pages/Home';
 import Category from '../pages/CategoryView';
-import AppBar from 'material-ui/AppBar';
+import PostShow from '../pages/PostShow';
 
 class App extends Component {
   render() {
@@ -23,8 +24,9 @@ class App extends Component {
             />
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route path="/:category" component={Category}/>
-              </Switch>
+              <Route exact path="/:category" component={Category}/>
+              <Route path="/:category/:postId" component={PostShow}/>
+            </Switch>
         </div>
       </MuiThemeProvider>
     );

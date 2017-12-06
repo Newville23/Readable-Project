@@ -65,7 +65,6 @@ export function fetchPosts() {
     return (dispatch) => {
         dispatch({type: FETCH_POSTS})
         request.then((response) => {
-            console.log(response)
             !response.error
             ? dispatch({type:FETCH_POSTS_SUCCESS, payload: response,})
             : dispatch({type: FETCH_POSTS_FAILURE, payload: response,});

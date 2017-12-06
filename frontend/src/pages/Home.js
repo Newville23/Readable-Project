@@ -5,16 +5,12 @@ import CategoryList from '../containers/CategoryList';
 import PostList from '../components/PostList';
 
 class Home extends Component {
-    componentDidMount() {
-        const {fetchPosts} = this.props;
-        fetchPosts();
-    }
     render () {
         return(
             <div>
             <div className="container">
-                {<CategoryList {...this.props}/>}
-                { <PostList {...this.props}/> }
+                <CategoryList {...this.props}/>
+                <PostList {...this.props}/> 
             </div>
             </div>
         )

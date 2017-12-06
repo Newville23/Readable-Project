@@ -4,12 +4,12 @@ import { getPostsCategory } from '../actions/posts';
 import CategoryList from '../containers/CategoryList';
 import PostList from '../components/PostList';
 
-class CategoryView extends Component {    
+class CategoryView extends Component {
     render () {
         return(
             <div className="container">
-                {<CategoryList {...this.props}/>}
-                { <PostList {...this.props}/> }
+                <CategoryList {...this.props}/>
+                 <PostList {...this.props}/> 
             </div>
         )
     }

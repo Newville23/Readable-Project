@@ -59,7 +59,16 @@ const posts = ( state = INITIAL_STATE, action ) => {
                 loading: true,
             }
         case FETCH_POST_SUCCESS:
-            return postNormalization(state, action);         
+            return {
+                ...state,
+                loading: false,
+                byId: {
+                    [payload.id]: {
+                        ...payload,
+                    } 
+                }, 
+                allIds: [payload.id]
+            }       
         default:
             return state
     }

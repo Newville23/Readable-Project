@@ -3,7 +3,7 @@ import PostDetailContainer from '../containers/PostDetailContainer';
 
 const PostShow = (props) => {
     return(
-       <PostDetailContainer id={props.params.id}/>
+       <PostDetailContainer id={props.match.params.postId}/>
     )
 }
 

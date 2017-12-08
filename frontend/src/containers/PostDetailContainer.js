@@ -4,12 +4,15 @@ import { fetchPost } from '../actions/posts';
 import PostDetails from '../components/PostDetails';
 
 class PostDetailContainer extends Component {
+    componentDidMount() {
+        const {fetchPost} = this.props;
+        fetchPost(this.props.id);
+    }
+
     render () {
         return(
-            <div>
             <div className="container">
                 <PostDetails {...this.props}/> 
-            </div>
             </div>
         )
     }

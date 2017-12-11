@@ -6,10 +6,11 @@ const PostDetails = (props) => {
         <div>
             {
                 allIds.map((post) => (
-                    <div>
+                    <div key={byId[post].id}>
                         <h2>{byId[post].title}</h2>
                         <p>{byId[post].body}</p>
                         <p> {byId[post].author}</p>
+                        <p>{byId[post].voteScore} votes</p>
                     </div>
                ))
             }

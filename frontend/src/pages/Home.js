@@ -7,11 +7,9 @@ import PostList from '../components/PostList';
 class Home extends Component {
     render () {
         return(
-            <div>
             <div className="container">
                 <CategoryList {...this.props}/>
                 <PostList {...this.props}/> 
-            </div>
             </div>
         )
     }

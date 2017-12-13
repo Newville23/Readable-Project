@@ -1,8 +1,14 @@
 import React from 'react';
 import IconButton from 'material-ui/IconButton';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
+import ActionEdit from 'material-ui/svg-icons/editor/mode-edit';
+import ActionComment from 'material-ui/svg-icons/editor/mode-comment';
+import ActionDownVote from 'material-ui/svg-icons/action/thumb-down';
+import ActionUpVote from 'material-ui/svg-icons/action/thumb-up';
 
 const PostDetails = (props) => {
-    const {allIds, byId} = props.posts;
+    const { allIds, byId } = props.posts;
+    const {votePost} = props;
     return (
         <div>
             {
@@ -11,26 +17,38 @@ const PostDetails = (props) => {
                         <h2>{byId[post].title}</h2>
                         <p>{byId[post].body}</p>
                         <p> {byId[post].author}</p>
-                        <p>{byId[post].voteScore} votes</p>
-                        <ul className="post-actions">
+                        <ul className="post-actionsList">
                             <li>
-                                <IconButton iconClassName="muidocs-icon-custom-github" />
+                                <p>{byId[post].voteScore} votes</p>
                             </li>
                             <li>
-                                <IconButton iconClassName="muidocs-icon-custom-github" />
+                                <IconButton tooltip="Vote Down"onClick={() => votePost("downVote", byId[post].id)}>
+                                    <ActionDownVote />
+                                </IconButton>
                             </li>
                             <li>
-                                <IconButton iconClassName="muidocs-icon-custom-github" />
+                                <IconButton tooltip="Vote Up" onClick={() => votePost("upVote", byId[post].id)}>
+                                    <ActionUpVote />
+                                </IconButton>
                             </li>
                             <li>
-                                <IconButton iconClassName="muidocs-icon-custom-github" />
+                                <IconButton tooltip="Add Comment">
+                                    <ActionComment />
+                                </IconButton>
                             </li>
                             <li>
-                                <IconButton iconClassName="muidocs-icon-custom-github" />
+                                <IconButton tooltip="Edit">
+                                    <ActionEdit />
+                                </IconButton>
+                            </li>
+                            <li>
+                                <IconButton tooltip="Delete">
+                                    <ActionDelete />
+                                </IconButton>
                             </li>
                         </ul>
                     </div>
-               ))
+                ))
             }
         </div>
     )

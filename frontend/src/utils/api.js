@@ -9,7 +9,8 @@ if (!token)
 
 const headers = {
   'Accept': 'application/json',
-  'Authorization': token
+  'Authorization': token,
+  'Content-Type': 'application/json',
 }
 
 //Get all of the categories available for the app
@@ -44,7 +45,7 @@ export const fetchPost = (postId) =>
 
 //Used for voting on a post  
 export const votePost = (option, postId) =>
-  fetch(`${api}/${postId}`, { method: 'POST', headers, body: JSON.stringify(option) })
+  fetch(`${api}/posts/${postId}`, { method: 'POST', headers: headers, body: JSON.stringify({option: option}), })
     .then(res => res.json())
 
 //Edit the details of an existing post

@@ -3,3 +3,22 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.post-actionsList { 
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.post-listed-actions{
+  align-content: center;
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: flex-start; 
+}
+
+.post-listed-actions li{
+  margin-right: 20px;
+}

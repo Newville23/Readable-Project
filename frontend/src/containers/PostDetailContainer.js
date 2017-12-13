@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost } from '../actions/posts';
+import { fetchPost, votePost } from '../actions/posts';
 import PostDetails from '../components/PostDetails';
 
 class PostDetailContainer extends Component {
@@ -23,4 +23,4 @@ const mapStateToProps = ({posts,}) => {
         posts,
     };
 }
-export default connect(mapStateToProps,{ fetchPost })(PostDetailContainer);
+export default connect(mapStateToProps,{ fetchPost, votePost })(PostDetailContainer);

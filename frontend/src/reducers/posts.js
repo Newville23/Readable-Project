@@ -7,6 +7,7 @@ import {
     EDIT_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE, EDIT_POST_RESET,
     VOTE_POST, VOTE_POST_SUCCESS, VOTE_POST_FAILURE, VOTE_POST_RESET,
 } from '../actions/posts';
+import { VOTE_COMMENT_POST_SUCCESS } from '../actions/comments';
 
 const INITIAL_STATE = {
     byId: {}, error: null, loading: false, allIds: [],
@@ -68,7 +69,18 @@ const posts = ( state = INITIAL_STATE, action ) => {
                     } 
                 }, 
                 allIds: [payload.id]
-            }       
+            }
+        case VOTE_POST_SUCCESS: 
+            return {
+                ...state,
+                loading: false,
+                byId: {
+                    ...state.byId,
+                    [payload.id]: {
+                        ...payload,
+                    }
+                }
+            }           
         default:
             return state
     }

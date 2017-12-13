@@ -77,7 +77,6 @@ export function fetchPost(postId) {
     const request = ReadableAPI.fetchPost(postId)
     return (dispatch) => {
         request.then((response) => {
-            console.log(response)
             !response.error
             ? dispatch({type: FETCH_POST_SUCCESS, payload: response,})
             : dispatch({type: FETCH_POST_FAILURE, payload: response,})
@@ -122,7 +121,7 @@ export function editPost(option, postId) {
             dispatch({type: EDIT_POST_SUCCESS, payload: response});
         })
         .catch(() => {
-            dispatch({type: EDIT_POST_FAILURE, payloa: ERROR_MESSAGE })
+            dispatch({type: EDIT_POST_FAILURE, payload: ERROR_MESSAGE })
         })
     }
 }
@@ -132,6 +131,7 @@ export function votePost(option, postId) {
     const request = ReadableAPI.votePost(option, postId)
     return (dispatch) => {
         request.then((response) => {
+            console.log(response)
             dispatch({type: VOTE_POST_SUCCESS, payload: response})
         })
         .catch(() => {

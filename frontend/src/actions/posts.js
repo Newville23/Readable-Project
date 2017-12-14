@@ -105,6 +105,7 @@ export function deletePost(postId) {
     const request = ReadableAPI.deletePost(postId);
     return (dispatch) => {
         request.then((response) => {
+            console.log(response)
             dispatch({type: DELETE_POST_SUCCESS, payload: response,});
         })
         .catch(() => {
@@ -131,7 +132,6 @@ export function votePost(option, postId) {
     const request = ReadableAPI.votePost(option, postId)
     return (dispatch) => {
         request.then((response) => {
-            console.log(response)
             dispatch({type: VOTE_POST_SUCCESS, payload: response})
         })
         .catch(() => {

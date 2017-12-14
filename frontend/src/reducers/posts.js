@@ -3,7 +3,7 @@ import {
     FETCH_POSTS, FETCH_POSTS_SUCCESS, FETCH_POSTS_FAILURE, SELECT_POSTS_RESET,
     FETCH_POST, FETCH_POST_SUCCESS, FETCH_POST_FAILURE, SELECT_POST_RESET,
     CREATE_POST, CREATE_POST_SUCCESS, CREATE_POST_FAILURE, CREATE_POST_RESET,
-    DELETE_POST, DELETE_POST_SUCCCESS, DELETE_POST_FAILURE, DELETE_POST_RESET,
+    DELETE_POST, DELETE_POST_SUCCESS, DELETE_POST_FAILURE, DELETE_POST_RESET,
     EDIT_POST, EDIT_POST_SUCCESS, EDIT_POST_FAILURE, EDIT_POST_RESET,
     VOTE_POST, VOTE_POST_SUCCESS, VOTE_POST_FAILURE, VOTE_POST_RESET,
 } from '../actions/posts';
@@ -74,6 +74,16 @@ const posts = ( state = INITIAL_STATE, action ) => {
             return {
                 ...state,
                 loading: false,
+                byId: {
+                    ...state.byId,
+                    [payload.id]: {
+                        ...payload,
+                    }
+                }
+            }
+            case DELETE_POST_SUCCESS:
+            return {
+                ...state, 
                 byId: {
                     ...state.byId,
                     [payload.id]: {

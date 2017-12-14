@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPost, votePost} from '../actions/posts';
+import { fetchPost, votePost, deletePost } from '../actions/posts';
 import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ActionEdit from 'material-ui/svg-icons/editor/mode-edit';
@@ -17,8 +17,18 @@ class PostList extends Component {
             this.props.fetchPosts();
         }
     }
+    handleDel = (postId) => {
+        const {deletePost} = this.props;
+        deletePost(postId);
+        const { match } = this.props;
+        if (match.params.category) {
+            this.props.getPostsCategory(match.params.category)
+        } else {
+            this.props.fetchPosts();
+        }
+    }
     renderPosts({ allIds, byId }) {
-        const { fetchPost, votePost } = this.props;
+        const { fetchPost, votePost, deletePost } = this.props;
         return allIds.map((post) => {
             return (
 
@@ -26,42 +36,42 @@ class PostList extends Component {
                     <Link to={`/${byId[post].category}/${byId[post].id}`}>
                         <h3 className="list-group item heading">{byId[post].title}</h3>
                     </Link>
-                        <h4>posted by {byId[post].author}</h4>
-                        <ul className="post-listed-actions">
+                    <h4>posted by {byId[post].author}</h4>
+                    <ul className="post-listed-actions">
                         <li>
-                        <p>
-                             {byId[post].commentCount} Comments  
+                            <p>
+                                {byId[post].commentCount} Comments
                         </p>
-                    </li>
-                            <li>
-                                <p>
-                                     {byId[post].voteScore} votes
+                        </li>
+                        <li>
+                            <p>
+                                {byId[post].voteScore} votes
                                 </p>
-                                
-                            </li>
-                            <li>
-                                <IconButton tooltip="Vote Down" onClick={() => votePost("downVote", byId[post].id)}>
-                                    <ActionDownVote />
-                                </IconButton>
-                            </li>
-                            <li>
-                                <IconButton tooltip="Vote Up" onClick={() => votePost("upVote", byId[post].id)}>
-                                    <ActionUpVote />
-                                </IconButton>
-                            </li>
 
-                            <li>
-                                <IconButton tooltip="Edit">
-                                    <ActionEdit />
-                                </IconButton>
-                            </li>
-                            <li>
-                                <IconButton tooltip="Delete">
-                                    <ActionDelete />
-                                </IconButton>
-                            </li>
-                        </ul>
- 
+                        </li>
+                        <li>
+                            <IconButton tooltip="Vote Down" onClick={() => votePost("downVote", byId[post].id)}>
+                                <ActionDownVote />
+                            </IconButton>
+                        </li>
+                        <li>
+                            <IconButton tooltip="Vote Up" onClick={() => votePost("upVote", byId[post].id)}>
+                                <ActionUpVote />
+                            </IconButton>
+                        </li>
+
+                        <li>
+                            <IconButton tooltip="Edit">
+                                <ActionEdit />
+                            </IconButton>
+                        </li>
+                        <li>
+                            <IconButton tooltip="Delete" onClick={() => this.handleDel(byId[post].id)}>
+                                <ActionDelete />
+                            </IconButton>
+                        </li>
+                    </ul>
+
                 </li>
 
             )
@@ -82,4 +92,4 @@ class PostList extends Component {
 
 }
 
-export default connect(null, { fetchPost, votePost })(PostList); 
+export default connect(null, { fetchPost, votePost, deletePost })(PostList); 

@@ -9,7 +9,7 @@ class CategoryView extends Component {
         return(
             <div className="container">
                 <CategoryList {...this.props}/>
-                 <PostList {...this.props}/> 
+                <PostList {...this.props}/>
             </div>
         )
     }

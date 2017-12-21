@@ -92,10 +92,12 @@ export function createPost(option) {
     option.timestamp = Date.now()
     const request = ReadableAPI.addPost(option)
     return (dispatch) => {
+        dispatch({type: CREATE_POST,});
         request.then((response) => {
-            !response.error
-            ? dispatch({type: CREATE_POST_SUCCESS, payload: response,})
-            : dispatch({type: CREATE_POST_FAILURE, payload: response,})
+            dispatch({type: CREATE_POST_SUCCESS, payload: response,});
+        })
+        .catch((response) => {
+            dispatch({type: CREATE_POST_FAILURE, payload: response,});
         })
     }
 }

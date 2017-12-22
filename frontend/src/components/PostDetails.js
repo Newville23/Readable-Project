@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ActionEdit from 'material-ui/svg-icons/editor/mode-edit';
@@ -8,7 +9,7 @@ import ActionUpVote from 'material-ui/svg-icons/action/thumb-up';
 
 const PostDetails = (props) => {
     const { allIds, byId } = props.posts;
-    const {votePost} = props;
+    const { votePost } = props;
     return (
         <div>
             {
@@ -22,7 +23,7 @@ const PostDetails = (props) => {
                                 <p>{byId[post].voteScore} votes</p>
                             </li>
                             <li>
-                                <IconButton tooltip="Vote Down"onClick={() => votePost("downVote", byId[post].id)}>
+                                <IconButton tooltip="Vote Down" onClick={() => votePost("downVote", byId[post].id)}>
                                     <ActionDownVote />
                                 </IconButton>
                             </li>
@@ -37,9 +38,11 @@ const PostDetails = (props) => {
                                 </IconButton>
                             </li>
                             <li>
-                                <IconButton tooltip="Edit">
-                                    <ActionEdit />
-                                </IconButton>
+                                <Link to={`/${byId[post].category}/${byId[post].id}/edit`}>
+                                    <IconButton tooltip="Edit">
+                                        <ActionEdit />
+                                    </IconButton>
+                                </Link>
                             </li>
                             <li>
                                 <IconButton tooltip="Delete">

@@ -61,9 +61,11 @@ class PostList extends Component {
                         </li>
 
                         <li>
-                            <IconButton tooltip="Edit">
-                                <ActionEdit />
-                            </IconButton>
+                            <Link to={`/${byId[post].category}/${byId[post].id}/edit`}>
+                                <IconButton tooltip="Edit">
+                                    <ActionEdit />
+                                </IconButton>
+                            </Link>
                         </li>
                         <li>
                             <IconButton tooltip="Delete" onClick={() => this.handleDel(byId[post].id)}>

@@ -76,10 +76,12 @@ export function fetchPosts() {
 export function fetchPost(postId) {
     const request = ReadableAPI.fetchPost(postId)
     return (dispatch) => {
+        dispatch({type: FETCH_POSTS})
         request.then((response) => {
-            !response.error
-            ? dispatch({type: FETCH_POST_SUCCESS, payload: response,})
-            : dispatch({type: FETCH_POST_FAILURE, payload: response,})
+            dispatch({type: FETCH_POST_SUCCESS, payload: response,})
+        })
+        .catch((response) => {
+            dispatch({type: FETCH_POST_FAILURE, payload: response,});
         })
     }
 }

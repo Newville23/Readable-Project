@@ -11,9 +11,7 @@ class PostDetailContainer extends Component {
 
     render () {
         return(
-            <div className="container">
                 <PostDetails {...this.props}/> 
-            </div>
         )
     }
 }

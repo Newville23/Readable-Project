@@ -30,7 +30,6 @@ class PostForm extends Component {
     };
 
     handleOnChange = name => event => {
-        console.log(name)
         const target = event.target;
         if(name === 'category') {
             var value = target.innerHTML;
@@ -48,7 +47,7 @@ class PostForm extends Component {
     render () {
         return(
             <div>
-                <form onSubmit={() => this.handleSubmit()}>
+                <form>
                     <TextField
                         floatingLabelText="Title"
                         onChange={this.handleOnChange('title')}

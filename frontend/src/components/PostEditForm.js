@@ -41,12 +41,11 @@ class PostEditForm extends Component{
     }
 
     render() {
-        const { allIds, byId } = this.props.posts;
         return(
             <div>
-            {allIds.map((post) =>( <h2>{byId[post].title}</h2> ) )}
                 <form>
                         <TextField
+                            className="update-input"
                             floatingLabelText="Title"
                             onChange={this.handleOnChange('title')}
                             value={this.state.title}
@@ -54,6 +53,7 @@ class PostEditForm extends Component{
                         />
                     <br/>
                         <TextField
+                            className="update-input"
                             floatingLabelText="Body"
                             onChange={this.handleOnChange('body')}
                             value={this.state.body}
@@ -61,7 +61,7 @@ class PostEditForm extends Component{
                         />
                     <br/>
                     <Link to="/" onClick={() => this.handleUpdate()}>
-                        <RaisedButton label="Update" primary={true} />
+                        <RaisedButton className="updateBtn" label="Update" primary={true} />
                     </Link>   
                          <RaisedButton label="Cancel" primary={true} />
                 </form>

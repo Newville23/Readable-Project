@@ -22,6 +22,14 @@
   font-size: large;
 }
 
+.updateBtn{
+  margin-right: 20px;
+}
+
+.update-input{
+  margin-bottom: 40px;
+  width: 500px !important;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

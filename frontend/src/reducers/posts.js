@@ -17,7 +17,7 @@ const postNormalization = (state, action) => {
     const { payload } = action;
     const {byId, allIds} = state;
     const postById = payload.reduce((tally, current) => {
-        tally[current.id] = { ...current }
+        tally[current.id] = { ...current };
         return tally;
     }, {});
     const postAllIds = payload.map((post) => post.id );

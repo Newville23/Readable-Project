@@ -60,7 +60,7 @@ export const deletePost = (postId) =>
 
 //Get all the comments for a single post
 export const fetchComments = (postId) => 
-  fetch(`${api}/${postId}/comments`, { headers })
+  fetch(`${api}/posts/${postId}/comments`, { headers })
     .then(res => res.json())
     .then(data => data)
 

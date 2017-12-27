@@ -10,8 +10,35 @@ const INITIAL_STATE = {
     byId: {}, error: null, loading: false, allIds: [],
 };  
 
+const commentsNormalization = (state, action) => {
+    const { payload } = action;
+    const { byId, allIds } = state;
+    const commentsById = payload.reduce((tally, current) => {
+        tally[current.id] = {...current};
+        return tally;
+    }, {});
+    const commentAllIds = payload.map((comment) => comment.id);
+    return {
+        ...state,
+        byId: commentsById,
+        allIds: commentAllIds,
+    } 
+}
+
 const comments = (state = INITIAL_STATE, action ) => {
-    return state;
+    switch (action.type) {
+        case FETCH_COMMENTS:
+            return {
+                ...state,
+                loading: true,
+            }
+        case FETCH_COMMENTS_SUCCESS: 
+            return commentsNormalization(state, action);
+    
+        default:
+            return state;
+    }
+  
 }
 
 export default comments; 

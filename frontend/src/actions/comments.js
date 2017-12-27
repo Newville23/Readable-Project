@@ -33,25 +33,17 @@ export const VOTE_COMMENT_POST_RESET = 'VOTE_COMMENT_POST_RESET'
 //Get all comments of a post Action creator
 export function fetchComments(postId) {
     const request = ReadableAPI.fetchComments(postId)
-    return {
-        type: FETCH_COMMENTS,
-        payload: request,
+    return (dispatch) => {
+        dispatch({type: FETCH_COMMENTS})
+        request.then((response) => {
+            dispatch({type: FETCH_COMMENTS_SUCCESS, payload: response});
+        })
+        .catch((response) => {
+            dispatch({type: FETCH_COMMENTS_FAILURE, payload: response});
+        })
     }
 }
 
-export function fetchCommentsSuccess(comments) {
-    return  {
-        type: FETCH_COMMENTS_SUCCESS,
-        payload: comments,
-    }
-}
-
-export function fetchCommentFailure(err) {
-    return {
-        type: FETCH_COMMENTS_FAILURE,
-        payload: err,
-    }
-}
 
 //Create Comment Action Creator
 export function createCommentPost(option, postId) {
@@ -125,9 +117,14 @@ export function editCommmentFailure(err) {
 //Vote Comment in a Post Action Creator
 export function voteCommentPost(option, commentId) {
     const request = ReadableAPI.voteComment(option, commentId)
-    return {
-        type: VOTE_COMMENT_POST,
-        payload: request,
+    return (dispatch) => {
+        dispatch({type: VOTE_COMMENT_POST});
+        request.then((response) => {
+            dispatch({type: VOTE_COMMENT_POST_SUCCESS, payload: response});
+        })
+        .catch((response) => {
+            dispatch({type: VOTE_COMMENT_POST_FAILURE, payload: response});
+        })
     }
 }
 

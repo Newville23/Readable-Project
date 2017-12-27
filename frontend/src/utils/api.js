@@ -71,7 +71,7 @@ export const addCommentPost = (option, postId) =>
 
 //Used for voting on a comment
 export const voteComment = (option, commentId) =>
-  fetch(`${api}/comments/${commentId}`, { method: 'POST', headers, body: JSON.stringify(option) })
+  fetch(`${api}/comments/${commentId}`, { method: 'POST', headers, body: JSON.stringify({option}), })
     .then(res => res.json())
 
 //Edit the details of an existing comment

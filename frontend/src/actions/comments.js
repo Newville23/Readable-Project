@@ -116,6 +116,8 @@ export function editCommmentFailure(err) {
 
 //Vote Comment in a Post Action Creator
 export function voteCommentPost(option, commentId) {
+    console.log('option,', option )
+    console.log('id', commentId )
     const request = ReadableAPI.voteComment(option, commentId)
     return (dispatch) => {
         dispatch({type: VOTE_COMMENT_POST});

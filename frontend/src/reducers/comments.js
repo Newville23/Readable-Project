@@ -26,6 +26,7 @@ const commentsNormalization = (state, action) => {
 }
 
 const comments = (state = INITIAL_STATE, action ) => {
+    const { payload } = action;
     switch (action.type) {
         case FETCH_COMMENTS:
             return {
@@ -34,7 +35,17 @@ const comments = (state = INITIAL_STATE, action ) => {
             }
         case FETCH_COMMENTS_SUCCESS: 
             return commentsNormalization(state, action);
-    
+        case VOTE_COMMENT_POST_SUCCESS: 
+            return {
+                ...state,
+                loading: false,
+                byId: {
+                    ...state.byId,
+                    [payload.id]: {
+                        ...payload,
+                    }
+                }
+            }
         default:
             return state;
     }

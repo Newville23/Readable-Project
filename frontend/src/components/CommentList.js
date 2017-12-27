@@ -10,6 +10,7 @@ import ActionUpVote from 'material-ui/svg-icons/action/thumb-up';
 class CommentList extends Component{
     render() {
         const {allIds, byId} = this.props.comments;
+        const {voteComment} = this.props;
         
         return(
             <div>
@@ -27,12 +28,12 @@ class CommentList extends Component{
                                                 {byId[comment].voteScore} votes
                                             </li>
                                             <li>
-                                                <IconButton tooltip="Vote Down">
+                                                <IconButton tooltip="Vote Down" onClick={() => voteComment("downVote", byId[comment].id)}>
                                                     <ActionDownVote />
                                                 </IconButton>
                                             </li>
                                             <li>
-                                                <IconButton tooltip="Vote Up" >
+                                                <IconButton tooltip="Vote Up" onClick={() => voteComment("upVote", byId[comment].id)}>
                                                     <ActionUpVote />
                                                 </IconButton>
                                             </li>

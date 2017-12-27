@@ -71,23 +71,14 @@ export function createCommentPostFailure(err) {
 //Delete Comment Action Creator 
 export function deleteCommentPost(commentId) {
     const request = ReadableAPI.deleteComment(commentId)
-    return {
-        type: DELETE_COMMENT,
-        payload: request,
-    }
-}
-
-export function deleteCommentPostSuccess(deletedComment) {    
-    return {
-        type: DELETE_COMMENT_SUCCCESS,
-        payload: deletedComment,
-    }
-}
-
-export function deleteCommentPostFailure(err) {    
-    return {
-        type: DELETE_COMMENT_FAILURE,
-        payload: err,
+    return (dispatch) => {
+        dispatch({type:DELETE_COMMENT});
+        request.then((response) => {
+            dispatch({type: DELETE_COMMENT_SUCCCESS, payload: response});
+        })
+        .catch((response) => {
+            dispatch({type: DELETE_COMMENT_FAILURE, payload: response});
+        });
     }
 }
 
@@ -130,16 +121,4 @@ export function voteCommentPost(option, commentId) {
     }
 }
 
-export function voteCommentPostSuccess(votedComment) {
-    return {
-        type: VOTE_COMMENT_POST_SUCCESS,
-        payload: votedComment,
-    }
-}
 
-export function voteCommentPostFailure(err) {
-    return {
-        type: VOTE_COMMENT_POST_FAILURE,
-        payload: err,
-    }
-}

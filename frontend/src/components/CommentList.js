@@ -8,6 +8,11 @@ import ActionDownVote from 'material-ui/svg-icons/action/thumb-down';
 import ActionUpVote from 'material-ui/svg-icons/action/thumb-up';
 
 class CommentList extends Component{
+    handleDel = (commentId) => {
+        const {deleteComment, fetchComments, id} = this.props;
+        deleteComment(commentId);
+        fetchComments(id);
+    }
     render() {
         const {allIds, byId} = this.props.comments;
         const {voteComment} = this.props;
@@ -45,9 +50,9 @@ class CommentList extends Component{
                                                 </Link>
                                             </li>
                                             <li>
-                                                <IconButton tooltip="Delete">
-                                                <ActionDelete />
-                                            </IconButton>
+                                                <IconButton tooltip="Delete" onClick={() => this.handleDel(comment)}>
+                                                    <ActionDelete />
+                                                </IconButton>
                                             </li>
                                         </ul>
                                     </li>    

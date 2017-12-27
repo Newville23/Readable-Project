@@ -46,6 +46,17 @@ const comments = (state = INITIAL_STATE, action ) => {
                     }
                 }
             }
+        case DELETE_COMMENT_SUCCCESS:
+            return{
+                ...state,
+                byId: {
+                    ...state.byId,
+                    [payload.id]: {
+                        ...payload,
+                    }
+                }
+
+            }    
         default:
             return state;
     }

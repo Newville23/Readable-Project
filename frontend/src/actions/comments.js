@@ -1,5 +1,11 @@
 import * as ReadableAPI from '../utils/api';
 
+//COMMENT 
+export const FETCH_COMMENT = 'FETCH_COMMENT'
+export const FETCH_COMMENT_SUCCESS = 'FETCH_COMMENT_SUCCESS'
+export const FETCH_COMMENT_FAILURE = 'FETCH_COMMENT_FAILURE'
+export const COMMENT_RESET = 'COMMENT_RESET'
+
 //COMMENT List 
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS'
@@ -29,6 +35,21 @@ export const VOTE_COMMENT_POST = 'VOTE_COMMENT_POST'
 export const VOTE_COMMENT_POST_SUCCESS = 'VOTE_COMMENT_POST_SUCCESS'
 export const VOTE_COMMENT_POST_FAILURE = 'VOTE_COMMENT_POST_FAILURE'
 export const VOTE_COMMENT_POST_RESET = 'VOTE_COMMENT_POST_RESET'
+
+//Get comment  Action creator
+export function fetchComment(commentId) {
+    const request = ReadableAPI.fetchComment(commentId)
+    return (dispatch) => {
+        dispatch({type: FETCH_COMMENT})
+        request.then((response) => {
+            console.log(response)
+            dispatch({type: FETCH_COMMENT_SUCCESS, payload: response});
+        })
+        .catch((response) => {
+            dispatch({type: FETCH_COMMENT_FAILURE, payload: response});
+        })
+    }
+}
 
 //Get all comments of a post Action creator
 export function fetchComments(postId) {
@@ -72,7 +93,7 @@ export function createCommentPostFailure(err) {
 export function deleteCommentPost(commentId) {
     const request = ReadableAPI.deleteComment(commentId)
     return (dispatch) => {
-        dispatch({type:DELETE_COMMENT});
+        dispatch({type: DELETE_COMMENT});
         request.then((response) => {
             dispatch({type: DELETE_COMMENT_SUCCCESS, payload: response});
         })
@@ -83,11 +104,16 @@ export function deleteCommentPost(commentId) {
 }
 
 //Edit Comment Action Creator 
-export function  editComment(commentId) {
-    const request = ReadableAPI.putComment
-    return {
-        type: EDIT_COMMENT_POST,
-        payload: request,
+export function  editComment(option, commentId) {
+    const request = ReadableAPI.putComment(option, commentId)
+    return (dispatch) => { 
+        dispatch({type: EDIT_COMMENT_POST});
+        request.then((response) => {
+            dispatch({type: EDIT_COMMENT_POST_SUCCESS, payload: response});
+        })
+        .catch((response) => {
+            dispatch({type: EDIT_COMMENT_POST_FAILURE, payload: response});
+        })
     } 
 }
 

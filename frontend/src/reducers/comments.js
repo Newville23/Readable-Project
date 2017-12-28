@@ -1,4 +1,5 @@
 import {
+    FETCH_COMMENT, FETCH_COMMENT_SUCCESS, FETCH_COMMENT_FAILURE,
     FETCH_COMMENTS, FETCH_COMMENTS_SUCCESS, FETCH_COMMENTS_FAILURE,
     CREATE_COMMENT, CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAILURE,
     DELETE_COMMENT, DELETE_COMMENT_SUCCCESS, DELETE_COMMENT_FAILURE,
@@ -28,6 +29,22 @@ const commentsNormalization = (state, action) => {
 const comments = (state = INITIAL_STATE, action ) => {
     const { payload } = action;
     switch (action.type) {
+        case FETCH_COMMENT: 
+            return {
+                ...state,
+                loading: true,
+            }
+        case FETCH_COMMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                byId: {
+                    [payload.id]: {
+                        ...payload,
+                    }
+                },
+                allIds: [payload.id],
+            }
         case FETCH_COMMENTS:
             return {
                 ...state,

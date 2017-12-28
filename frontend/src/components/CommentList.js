@@ -43,7 +43,7 @@ class CommentList extends Component{
                                                 </IconButton>
                                             </li>
                                             <li>
-                                                <Link to={`/`}>
+                                                <Link to={`/comments/${comment}`}>
                                                     <IconButton tooltip="Edit">
                                                         <ActionEdit />
                                                     </IconButton>

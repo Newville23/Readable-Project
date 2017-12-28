@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost, votePost } from '../actions/posts';
-import { fetchComments, voteCommentPost, deleteCommentPost } from '../actions/comments';
+import { fetchComments, voteCommentPost, deleteCommentPost, createCommentPost } from '../actions/comments';
 import PostDetails from '../components/PostDetails';
 import CommentList from '../components/CommentList';
 
@@ -33,4 +33,4 @@ const mapStateToProps = ({posts, comments}) => {
         comments,
     };
 }
-export default connect(mapStateToProps,{ fetchPost, votePost, fetchComments, voteCommentPost, deleteCommentPost })(PostDetailContainer);
+export default connect(mapStateToProps,{ fetchPost, votePost, fetchComments, voteCommentPost, deleteCommentPost, createCommentPost, })(PostDetailContainer);

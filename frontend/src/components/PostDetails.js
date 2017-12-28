@@ -1,60 +1,106 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ActionEdit from 'material-ui/svg-icons/editor/mode-edit';
 import ActionComment from 'material-ui/svg-icons/editor/mode-comment';
 import ActionDownVote from 'material-ui/svg-icons/action/thumb-down';
 import ActionUpVote from 'material-ui/svg-icons/action/thumb-up';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
-const PostDetails = (props) => {
-    const { allIds, byId } = props.posts;
-    const { votePost } = props;
-    return (
-        <div>
-            {
-                allIds.map((post) => (
-                    <div key={byId[post].id}>
-                        <h2>{byId[post].title}</h2>
-                        <p>{byId[post].body}</p>
-                        <p> {byId[post].author}</p>
-                        <ul className="post-actionsList">
-                            <li>
-                                <p>{byId[post].voteScore} votes</p>
-                            </li>
-                            <li>
-                                <IconButton tooltip="Vote Down" onClick={() => votePost("downVote", byId[post].id)}>
-                                    <ActionDownVote />
-                                </IconButton>
-                            </li>
-                            <li>
-                                <IconButton tooltip="Vote Up" onClick={() => votePost("upVote", byId[post].id)}>
-                                    <ActionUpVote />
-                                </IconButton>
-                            </li>
-                            <li>
-                                <IconButton tooltip="Add Comment">
-                                    <ActionComment />
-                                </IconButton>
-                            </li>
-                            <li>
-                                <Link to={`/${byId[post].category}/${byId[post].id}/edit`}>
-                                    <IconButton tooltip="Edit">
-                                        <ActionEdit />
-                                    </IconButton>
-                                </Link>
-                            </li>
-                            <li>
-                                <IconButton tooltip="Delete">
-                                    <ActionDelete />
-                                </IconButton>
-                            </li>
-                        </ul>
-                    </div>
-                ))
-            }
-        </div>
-    )
+class PostDetails extends Component {
+
+    state = {
+        author: '',
+        body: '',
+    };
+    handleOnChange = name => event => {
+        const target = event.target;
+        const value = target.value;
+        this.setState({
+            [name]: value,
+        });
+    }
+    handleSubmit = () => {
+        const { createCommentPost, id } = this.props;
+        createCommentPost(this.state, id );
+        this.setState({
+            author: '',
+            body: '',
+        });
+
+    }
+    render() {
+        const { allIds, byId } = this.props.posts;
+        const { votePost } = this.props;
+        return (
+            <div>
+                {
+                    allIds.map((post) => (
+                            <div key={byId[post].id}>
+                                <h2>{byId[post].title}</h2>
+                                <p>{byId[post].body}</p>
+                                <p> {byId[post].author}</p>
+                                <ul className="post-actionsList">
+                                    <li>
+                                        <p>{byId[post].voteScore} votes</p>
+                                    </li>
+                                    <li>
+                                        <IconButton tooltip="Vote Down" onClick={() => votePost("downVote", byId[post].id)}>
+                                            <ActionDownVote />
+                                        </IconButton>
+                                    </li>
+                                    <li>
+                                        <IconButton tooltip="Vote Up" onClick={() => votePost("upVote", byId[post].id)}>
+                                            <ActionUpVote />
+                                        </IconButton>
+                                    </li>
+                                    <li>
+                                        <Link to={`/${byId[post].category}/${byId[post].id}/edit`}>
+                                            <IconButton tooltip="Edit">
+                                                <ActionEdit />
+                                            </IconButton>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <IconButton tooltip="Delete">
+                                            <ActionDelete />
+                                        </IconButton>
+                                    </li>
+                                </ul>
+                            </div>
+                    ))
+                }
+                <div className="comment-form">
+                    <h3>
+                        <IconButton>
+                            <ActionComment />
+                        </IconButton>
+                        <span>Add a comment</span>
+                    </h3>
+                    <form>
+                        <TextField
+                            floatingLabelText="Author"
+                            onChange={this.handleOnChange('author')}
+                            value={this.state.author}
+                            name="author"
+                        />
+                        <br />
+                        <TextField
+                            floatingLabelText="Body"
+                            onChange={this.handleOnChange('body')}
+                            value={this.state.body}
+                            name="body"
+                        />
+
+                            <RaisedButton label="Add" primary={true} onClick={() => this.handleSubmit()}/>
+
+                    </form>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default PostDetails;

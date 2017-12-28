@@ -1,4 +1,5 @@
 import * as ReadableAPI from '../utils/api';
+import cuid from 'cuid';
 
 //COMMENT 
 export const FETCH_COMMENT = 'FETCH_COMMENT'
@@ -68,24 +69,21 @@ export function fetchComments(postId) {
 
 //Create Comment Action Creator
 export function createCommentPost(option, postId) {
-    const request = ReadableAPI.addCommentPost(option, postId)
-    return {
-        type: CREATE_COMMENT,
-        payload: request,
-    }
-}
-
-export function createCommentPostSuccess(addedComment) {
-    return {
-        type: CREATE_COMMENT_SUCCESS,
-        payload: addedComment,
-    }
-}
-
-export function createCommentPostFailure(err) {
-    return {
-        type: CREATE_COMMENT_FAILURE,
-        payload: err,
+    const commentId = cuid();
+    option.id = commentId;
+    option.parentId = postId;
+    option.timestamp = Date.now();
+    console.log('option', option)
+    const request = ReadableAPI.addCommentPost(option)
+    return (dispatch) => {
+        dispatch({type: CREATE_COMMENT,});
+        request.then((response) => {
+            console.log(response)
+            dispatch({type: CREATE_COMMENT_SUCCESS, payload: response});
+        })
+        .catch((response) => {
+            dispatch({type: CREATE_COMMENT_FAILURE, payload: response});
+        })
     }
 }
 

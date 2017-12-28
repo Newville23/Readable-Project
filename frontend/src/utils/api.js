@@ -70,7 +70,7 @@ export const fetchComment = (commentId) =>
   .then(data => data)  
 
 //Add a comment to a post
-export const addCommentPost = (option, postId) =>
+export const addCommentPost = (option) =>
   fetch(`${api}/comments`, { method: 'POST', headers, body: JSON.stringify(option) })
     .then(res => res.json()) 
 

@@ -63,6 +63,20 @@ const comments = (state = INITIAL_STATE, action ) => {
                     }
                 }
             }
+        case CREATE_COMMENT_SUCCESS: 
+            return{
+                ...state,
+                byId: {
+                    ...state.byId,
+                    [payload.id]:{
+                        ...payload,
+                    }
+                },
+                allIds: [
+                    ...state.allIds,
+                    payload.id,
+                ]
+            }
         case DELETE_COMMENT_SUCCCESS:
             return{
                 ...state,

@@ -31,7 +31,6 @@ class PostList extends Component {
         const { fetchPost, votePost, deletePost } = this.props;
         return allIds.map((post) => {
             return (
-
                 <li key={byId[post].id} className="list-group-item">
                     <Link to={`/${byId[post].category}/${byId[post].id}`}>
                         <h3 className="list-group item heading">{byId[post].title}</h3>
@@ -68,14 +67,13 @@ class PostList extends Component {
                             </Link>
                         </li>
                         <li>
-                            <IconButton tooltip="Delete" onClick={() => this.handleDel(byId[post].id)}>
+                            <IconButton tooltip="Delete" onClick={() => this.handleDel(post)}>
                                 <ActionDelete />
                             </IconButton>
                         </li>
                     </ul>
 
                 </li>
-
             )
         })
     }

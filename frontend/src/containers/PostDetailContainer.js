@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost, votePost } from '../actions/posts';
+import { fetchPost, votePost, deletePost } from '../actions/posts';
 import { fetchComments, voteCommentPost, deleteCommentPost, createCommentPost } from '../actions/comments';
 import PostDetails from '../components/PostDetails';
 import CommentList from '../components/CommentList';
@@ -27,10 +27,10 @@ class PostDetailContainer extends Component {
     }
 }
 
-const mapStateToProps = ({posts, comments}) => {
+const mapStateToProps = ({posts, comments,}) => {
     return {
         posts,
         comments,
     };
 }
-export default connect(mapStateToProps,{ fetchPost, votePost, fetchComments, voteCommentPost, deleteCommentPost, createCommentPost, })(PostDetailContainer);
+export default connect(mapStateToProps,{ fetchPost, votePost, deletePost, fetchComments, voteCommentPost, deleteCommentPost, createCommentPost, })(PostDetailContainer);

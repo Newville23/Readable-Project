@@ -8,7 +8,7 @@ const PostShow = (props) => {
     return(
         <div className="container">
             <CategoryList {...this.props}/>
-            <PostDetailContainer id={props.match.params.postId}/>
+            <PostDetailContainer id={props.match.params.postId} goBack={props.history.goBack}/>
         </div>
     )
 }

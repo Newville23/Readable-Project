@@ -29,6 +29,11 @@ class PostDetails extends Component {
             author: '',
             body: '',
         });
+    }
+    handleDel = (postId) => {
+        const { deletePost, goBack } = this.props;
+        deletePost(postId);
+        goBack();
 
     }
     render() {
@@ -64,7 +69,7 @@ class PostDetails extends Component {
                                         </Link>
                                     </li>
                                     <li>
-                                        <IconButton tooltip="Delete">
+                                        <IconButton tooltip="Delete" onClick={() => this.handleDel(post)}>
                                             <ActionDelete />
                                         </IconButton>
                                     </li>

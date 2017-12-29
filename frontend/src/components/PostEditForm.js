@@ -63,7 +63,7 @@ class PostEditForm extends Component{
                     <Link to="/" onClick={() => this.handleUpdate()}>
                         <RaisedButton className="updateBtn" label="Update" primary={true} />
                     </Link>   
-                         <RaisedButton label="Cancel" primary={true} />
+                         <RaisedButton label="Cancel" primary={true} onClick={() => this.props.goBack()}/>
                 </form>
             </div>
         )

@@ -5,7 +5,7 @@ class PostEdit extends Component{
         return(
             <div className="container">
                 <h1>Edit Post</h1>
-               <PostEditContainer id={this.props.match.params.postId}/>
+               <PostEditContainer id={this.props.match.params.postId}  goBack={this.props.history.goBack}/>
             </div>
         )
     }

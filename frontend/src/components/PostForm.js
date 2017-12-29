@@ -79,7 +79,8 @@ class PostForm extends Component {
 
                     <Link to="/" onClick={() => this.handleSubmit()}>
                         <RaisedButton label="Add" primary={true} />
-                    </Link>    
+                    </Link>  
+                    <RaisedButton label="Cancel" primary={true} onClick={() => this.props.goBack()}/>
                 </form>
                 
             </div>

@@ -24,8 +24,9 @@ class PostDetails extends Component {
         });
     }
     handleSubmit = () => {
-        const { createCommentPost, id } = this.props;
+        const { createCommentPost, id, fetchPost } = this.props;
         createCommentPost(this.state, id );
+        fetchPost(id);
         this.setState({
             author: '',
             body: '',
@@ -50,7 +51,7 @@ class PostDetails extends Component {
                                 <p> {byId[post].author}</p>
                                 <ul className="post-actionsList">
                                     <li>
-                                        <p>{byId[post].voteScore} votes</p>
+                                        <p>{byId[post].commentCount} comments / {byId[post].voteScore} votes</p>
                                     </li>
                                     <li>
                                         <IconButton tooltip="Vote Down" onClick={() => votePost("downVote", byId[post].id)}>

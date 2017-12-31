@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import ActionEdit from 'material-ui/svg-icons/editor/mode-edit';
@@ -7,17 +7,19 @@ import ActionComment from 'material-ui/svg-icons/editor/mode-comment';
 import ActionDownVote from 'material-ui/svg-icons/action/thumb-down';
 import ActionUpVote from 'material-ui/svg-icons/action/thumb-up';
 
-class CommentList extends Component{
+class CommentList extends Component {
     handleDel = (commentId) => {
-        const {deleteComment, fetchComments, id} = this.props;
+        const { deleteComment, fetchComments, id, fetchPost } = this.props;
         deleteComment(commentId);
+        fetchPost(id);
         fetchComments(id);
+
     }
     render() {
-        const {allIds, byId} = this.props.comments;
-        const {voteComment} = this.props;
-        
-        return(
+        const { allIds, byId } = this.props.comments;
+        const { voteComment } = this.props;
+
+        return (
             <div>
                 <h3>Comments</h3>
                 <ul className="comment-list">
@@ -55,7 +57,7 @@ class CommentList extends Component{
                                                 </IconButton>
                                             </li>
                                         </ul>
-                                    </li>    
+                                    </li>
                                 </ul>
                             </li>
                         ))

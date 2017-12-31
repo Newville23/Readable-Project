@@ -7,9 +7,7 @@ class PostCreate extends Component {
         const {history} = this.props;
         return(
             <div className="container">
-                <h1>
-                   Add Post
-                </h1>    
+                <h1 className="page-title" > <span className="page-sub"> Add Post</span></h1> 
                 <CategoryList/>
                 <PostFormContainer goBack={history.goBack}/>
             </div>

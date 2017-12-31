@@ -22,14 +22,99 @@
   font-size: large;
 }
 
-.updateBtn{
+.page-title {
+ border-bottom: 1px solid #768ada6b;
+ padding-bottom: 20px;
+}
+.page-sub {
+   border-bottom: 1px solid #57659B;
+   padding-bottom: 20px;
+}
+.updateBtn {
   margin-right: 20px;
 }
 
-.update-input{
+.update-input {
   margin-bottom: 40px;
   width: 500px !important;
 }
+
+/* cateory List */
+.categories-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+.categories-item a {
+  text-decoration: none;
+}
+/* Post List */
+.post-list {
+  padding: 0;
+  list-style: none;
+}
+.list-group-item {
+  margin: 20px 0;
+}
+
+.sort-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.sort-label {
+  line-height: 30px;
+}
+/* Post DEtail */
+.comment-add-form {
+  display: flex;
+  align-items: center;
+}
+
+.comment-add-form>div {
+  display: block;
+  margin-right: 20px;
+}
+
+.post-detail-card{
+  padding: 20px;
+}
+.btn-add-post {
+  margin-right: 20px;
+  margin-top: 20px;
+}
+.comment-list{
+  list-style: none;
+  padding: 0;
+}
+.comment-list .comment-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #768ada6b;
+}
+.comment-list .comment-item-detail {
+  list-style: none;
+  padding: 0;
+}
+.comment-list .comment-item-detail .comment-author {
+  color:  #57659B;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+.comment-list .comment-item-detail .comment-body {
+  color:  #4a4a4a;
+}
+.comment-list .action-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

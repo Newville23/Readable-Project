@@ -8,6 +8,7 @@ import ActionDownVote from 'material-ui/svg-icons/action/thumb-down';
 import ActionUpVote from 'material-ui/svg-icons/action/thumb-up';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
 class PostDetails extends Component {
 
@@ -43,7 +44,7 @@ class PostDetails extends Component {
             <div>
                 {
                     allIds.map((post) => (
-                            <div key={byId[post].id}>
+                            <Paper className="post-detail-card" zDepth={1} key={byId[post].id}>
                                 <h2>{byId[post].title}</h2>
                                 <p>{byId[post].body}</p>
                                 <p> {byId[post].author}</p>
@@ -74,7 +75,7 @@ class PostDetails extends Component {
                                         </IconButton>
                                     </li>
                                 </ul>
-                            </div>
+                            </Paper>
                     ))
                 }
                 <div className="comment-form">
@@ -84,7 +85,7 @@ class PostDetails extends Component {
                         </IconButton>
                         <span>Add a comment</span>
                     </h3>
-                    <form>
+                    <form className="comment-add-form">
                         <TextField
                             floatingLabelText="Author"
                             onChange={this.handleOnChange('author')}
@@ -98,9 +99,7 @@ class PostDetails extends Component {
                             value={this.state.body}
                             name="body"
                         />
-
-                            <RaisedButton label="Add" primary={true} onClick={() => this.handleSubmit()}/>
-
+                        <RaisedButton label="Add" primary={true} onClick={() => this.handleSubmit()}/>
                     </form>
                 </div>
             </div>

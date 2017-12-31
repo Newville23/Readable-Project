@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import TextField from 'material-ui/TextField';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -7,33 +7,33 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const categories = [
     {
-      name: 'react',
-      path: 'react'
+        name: 'react',
+        path: 'react'
     },
     {
-      name: 'redux',
-      path: 'redux'
+        name: 'redux',
+        path: 'redux'
     },
     {
-      name: 'udacity',
-      path: 'udacity'
+        name: 'udacity',
+        path: 'udacity'
     }
-]; 
+];
 
 class PostForm extends Component {
 
     state = {
-            title: '',
-            author: '',
-            category: 'react',
-            body: '',
+        title: '',
+        author: '',
+        category: 'react',
+        body: '',
     };
 
     handleOnChange = name => event => {
         const target = event.target;
-        if(name === 'category') {
+        if (name === 'category') {
             var value = target.innerHTML;
-        }else{
+        } else {
             var value = target.value;
         }
         this.setState({
@@ -41,11 +41,11 @@ class PostForm extends Component {
         });
     }
     handleSubmit = () => {
-         const {createPost} = this.props;
-         createPost(this.state);
+        const { createPost } = this.props;
+        createPost(this.state);
     }
-    render () {
-        return(
+    render() {
+        return (
             <div>
                 <form>
                     <TextField
@@ -62,13 +62,14 @@ class PostForm extends Component {
                         name="author"
                     />
                     <br />
+                    <span>Add a category </span>  
                     <DropDownMenu value={this.state.category} onChange={this.handleOnChange('category')}>
                         {categories.map(option => (
-                            <MenuItem key={option.name} value={option.path} primaryText={option.path}/>
+                            <MenuItem key={option.name} value={option.path} primaryText={option.path} />
                         ))}
                     </DropDownMenu>
-                  <br/>
-                   <TextField
+                    <br />
+                    <TextField
                         floatingLabelText="Body"
                         multiLine={true}
                         rows={2}
@@ -76,13 +77,16 @@ class PostForm extends Component {
                         value={this.state.body}
                         name="body"
                     />
+                    <br/>
+                    <div>
+                        <Link to="/" onClick={() => this.handleSubmit()}>
+                            <RaisedButton className="btn-add-post" label="Add" primary={true} />
+                        </Link>
+                        <RaisedButton className="btn-add-post"  label="Cancel" primary={true} onClick={() => this.props.goBack()} />
+                    </div>
 
-                    <Link to="/" onClick={() => this.handleSubmit()}>
-                        <RaisedButton label="Add" primary={true} />
-                    </Link>  
-                    <RaisedButton label="Cancel" primary={true} onClick={() => this.props.goBack()}/>
                 </form>
-                
+
             </div>
         )
     }

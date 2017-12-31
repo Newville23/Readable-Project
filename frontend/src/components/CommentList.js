@@ -24,9 +24,9 @@ class CommentList extends Component{
                     {
                         allIds.map((comment) => (
                             <li className="comment-item" key={byId[comment].id}>
-                                <ul>
-                                    <li>{byId[comment].author}</li>
-                                    <li>{byId[comment].body}</li>
+                                <ul className="comment-item-detail">
+                                    <li className="comment-author">{byId[comment].author}</li>
+                                    <li className="comment-body">{byId[comment].body}</li>
                                     <li>
                                         <ul className="action-list">
                                             <li>

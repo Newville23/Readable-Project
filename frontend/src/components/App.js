@@ -24,7 +24,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="App">
             <AppBar 
-              title={ <Link to="/"> Readable </Link>}
+              title={ <Link to="/" className="app-title"> Readable </Link>}
               showMenuIconButton={false} 
             />
             <Switch>

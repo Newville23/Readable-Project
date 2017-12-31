@@ -6,7 +6,7 @@ class CommentEdit extends Component {
         const { match, history } = this.props;
         return (
             <div className="container">
-                <h1>Edit Comment</h1>
+             <h1 className="page-title" > <span className="page-sub">Edit Comment</span></h1>
                 <CommentEditContainer id={match.params.commentId} goBack={history.goBack} />
             </div>
         )

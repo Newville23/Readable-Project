@@ -110,14 +110,11 @@ class PostList extends Component {
                                     <ActionEdit />
                                 </IconButton>
                             </Link>
-                            <IconButton tooltip="Delete" onClick={() => this.handleDel(post)}>
+                            <IconButton tooltip="Delete" onClick={() => this.handleDel(post.id)}>
                                 <ActionDelete />
                             </IconButton>
                         </CardActions>
                     </Card>
-
-
-
                 </li>
             )
         })

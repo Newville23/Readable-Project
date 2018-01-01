@@ -39,11 +39,11 @@ class PostDetails extends Component {
 
     }
     render() {
-        const { allIds, byId } = this.props.posts;
+        const { allIds, byId, } = this.props.posts;
         const { votePost } = this.props;
         return (
             <div>
-                {
+                { 
                     allIds.map((post) => (
                             <Paper className="post-detail-card" zDepth={1} key={byId[post].id}>
                                 <h2>{byId[post].title}</h2>

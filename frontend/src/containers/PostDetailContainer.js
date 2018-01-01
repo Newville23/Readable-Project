@@ -4,6 +4,7 @@ import { fetchPost, votePost, deletePost } from '../actions/posts';
 import { fetchComments, voteCommentPost, deleteCommentPost, createCommentPost } from '../actions/comments';
 import PostDetails from '../components/PostDetails';
 import CommentList from '../components/CommentList';
+import NoMatch from '../pages/NoMatch';
 
 class PostDetailContainer extends Component {
     componentDidMount() {
@@ -13,15 +14,23 @@ class PostDetailContainer extends Component {
     }
 
     render () {
+        const {error} = this.props.posts;
         return(
             <div>   
-                <PostDetails {...this.props}/> 
-                <CommentList 
-                    comments={this.props.comments} 
-                    deleteComment={this.props.deleteCommentPost} 
-                    voteComment={this.props.voteCommentPost}
-                    {...this.props}
-                />
+                { error ? (
+                    <NoMatch/>
+                ) : (
+                    <div>
+                        <PostDetails {...this.props}/> 
+                        <CommentList 
+                            comments={this.props.comments} 
+                            deleteComment={this.props.deleteCommentPost} 
+                            voteComment={this.props.voteCommentPost}
+                            {...this.props}
+                        />
+                    </div>
+                )
+                }
             </div>
         )
     }

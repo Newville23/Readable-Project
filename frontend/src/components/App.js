@@ -29,9 +29,8 @@ class App extends Component {
               showMenuIconButton={false} 
             />
             <Switch>
-          
               <Route exact path="/" component={Home}/>
-              <Route exact path="/new-post" component={PostCreate}/>
+              <Route path="/new-post" component={PostCreate}/>
               <Route path="/comments/:commentId" component={CommentEdit}/>
               <Route exact path="/:category/:postId/edit" component={PostEdit} />
               <Route exact path="/:category/:postId" component={PostShow}/>

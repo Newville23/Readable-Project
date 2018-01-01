@@ -59,6 +59,11 @@ const posts = ( state = INITIAL_STATE, action ) => {
                 ...state,
                 loading: true,
             }
+        case FETCH_POST_FAILURE:
+            return {
+                ...state,
+                error: payload,
+            }
         case FETCH_POST_SUCCESS:
             return {
                 ...state,

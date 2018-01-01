@@ -15,7 +15,7 @@ export const POSTS_RESET = 'POSTS_RESET'
 //Post Details
 export const FETCH_POST = 'FETCH_POST'
 export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS'
-export const FETCH_POST_FAILURE = 'FETCH_POSTS_FAILURE'
+export const FETCH_POST_FAILURE = 'FETCH_POST_FAILURE'
 export const SELECT_POST_RESET = 'SELECT_POST_RESET'
 
 //Create Post 
@@ -44,14 +44,21 @@ export const VOTE_POST_RESET = 'VOTE_POST_RESET'
 
 const ERROR_MESSAGE = 'Sorry! we could not finished the action try again'
 
-
+function handleError(response, type, dispatch) {
+    if (!response.ok) {
+        dispatch({type});
+    }
+    return response;
+}
 //Posts Category
 export function getPostsCategory(category) {
     const request = ReadableAPI.fetchCategoryPosts(category)
     return (dispatch) => {
         dispatch({type: FETCH_POSTS_CATEGORY})
         request.then((response) => {
-            dispatch({type: FETCH_POSTS_CATEGORY_SUCCESS, payload: response})
+            !response.error
+            ? dispatch({type: FETCH_POSTS_CATEGORY_SUCCESS, payload: response})
+            : dispatch({type: FETCH_POSTS_CATEGORY_FAILURE, payload: response})
         })
         .catch(() => {
             dispatch({type: FETCH_POSTS_CATEGORY_FAILURE, payload: ERROR_MESSAGE})
@@ -76,15 +83,18 @@ export function fetchPosts() {
 export function fetchPost(postId) {
     const request = ReadableAPI.fetchPost(postId)
     return (dispatch) => {
-        dispatch({type: FETCH_POSTS})
+        dispatch({type: FETCH_POST})
         request.then((response) => {
-            dispatch({type: FETCH_POST_SUCCESS, payload: response,})
+            !response.error
+            ? dispatch({type: FETCH_POST_SUCCESS, payload: response,})
+            : dispatch({type: FETCH_POST_FAILURE, payload: response,});
         })
         .catch((response) => {
-            dispatch({type: FETCH_POST_FAILURE, payload: response,});
+            dispatch({type: FETCH_POST_FAILURE, payload: response,})
         })
     }
 }
+
 
 //Create Post Action Creator
 export function createPost(option) {

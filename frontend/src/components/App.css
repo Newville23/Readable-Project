@@ -90,6 +90,7 @@
 .comment-list .comment-item {
   background: #fff;
   padding: 20px;
+  margin: 15px 0;
   border-radius: 10px;
   border: 1px solid #768ada6b;
 }

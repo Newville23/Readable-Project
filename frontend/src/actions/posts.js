@@ -113,7 +113,6 @@ export function deletePost(postId) {
     const request = ReadableAPI.deletePost(postId);
     return (dispatch) => {
         request.then((response) => {
-            console.log(response)
             dispatch({type: DELETE_POST_SUCCESS, payload: response,});
         })
         .catch(() => {

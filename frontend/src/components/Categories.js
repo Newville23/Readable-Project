@@ -9,27 +9,29 @@ const styles = {
     },
   };
 
-class Categories extends Component {
-    render () {
-        const { categories, getPostsCategory, match } = this.props;
-        return (
-            <div>
-            <ul className="categories-list">
-                {categories.all.map((category) => (
+  const Categories  = (props) => {
+    const { categories, getPostsCategory, match } = props;
+    return (
+        <div>
+        <ul className="categories-list">
+            {categories.all.map((category) => {
+                const { path } = category;
+                const { chip } = styles;
+                return (
                     <li key={category.name} className="categories-item"> 
-                        <Link to={`/${category.path}`} onClick={() => getPostsCategory(category.path)}>
+                        <Link to={`/${path}`} onClick={() => getPostsCategory(path)}>
                             <Chip
-                                style={styles.chip}
+                                style={chip}
                             >    
-                                {category.path}
+                                {path}
                             </Chip>
                         </Link>
                     </li>
-                ))}
-            </ul>
-        </div>
-        )
-    }
+                )
+            })}
+        </ul>
+    </div>
+    )
 }
 
 export default Categories;

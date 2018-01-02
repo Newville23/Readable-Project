@@ -5,8 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { editPost } from '../actions/posts';
 
 class PostEditForm extends Component{
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             title: '',
             body: 'posts.allIds[id].body',
@@ -17,7 +17,6 @@ class PostEditForm extends Component{
           const {id} = this.props;
           const { allIds, byId } = this.props.posts;
           if (allIds.length > 0){
-            console.log('coronaste')
             const currentPost = allIds.map((post) => byId[post]);
             this.setState({
                 title: currentPost[0].title,

@@ -4,15 +4,13 @@ import { getPostsCategory } from '../actions/posts';
 import CategoryList from '../containers/CategoryList';
 import PostList from '../components/PostList';
 
-class CategoryView extends Component {
-    render () {
-        return(
-            <div className="container">
-                <CategoryList {...this.props}/>
-                <PostList {...this.props}/>
-            </div>
-        )
-    }
+const CategoryView = (props) => {
+    return(
+        <div className="container">
+            <CategoryList {...props} />
+            <PostList {...props} />
+        </div>
+    )
 }
 
 const mapStateToProps = ({posts,}) => {

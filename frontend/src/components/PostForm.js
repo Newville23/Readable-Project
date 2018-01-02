@@ -31,11 +31,13 @@ class PostForm extends Component {
 
     handleOnChange = name => event => {
         const target = event.target;
-        if (name === 'category') {
-            var value = target.innerHTML;
-        } else {
-            var value = target.value;
-        }
+        const value = (() => {
+            if (name === 'category') {
+                return target.innerHTML;
+            } else {
+                return target.value;
+            }
+        })();
         this.setState({
             [name]: value,
         });

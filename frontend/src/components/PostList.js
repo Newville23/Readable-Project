@@ -50,12 +50,16 @@ class PostList extends Component {
         const postListed = allIds.map((post) => {
             return { ...byId[post] }
         }).sort((a, b) => {
+            let voteA = a.voteScore;
+            let voteB = b.voteScore;
+            let titleA = a.title;
+            let titleB = b.title;
+            let dateA = a.timestamp;
+            let dateB = b.timestamp;
             const vote = 'vote';
             const title = 'title';
             switch (type) {
                 case vote: 
-                    const voteA = a.voteScore;
-                    const voteB = b.voteScore;
                     if (voteA < voteB) {
                         return 1;
                     }
@@ -64,8 +68,6 @@ class PostList extends Component {
                     }
                     return 0;
                 case title:
-                    const titleA = a.title;
-                    const titleB = b.title;
                     if (a.title < b.title) {
                         return -1;
                     }
@@ -74,8 +76,6 @@ class PostList extends Component {
                     }
                     return 0;
                 default:
-                    const dateA = a.timestamp;
-                    const dateB = b.timestamp;
                     if (a.timestamp < b.timestamp){
                         return 1;
                     }

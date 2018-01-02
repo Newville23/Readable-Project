@@ -15,28 +15,59 @@ class PostDetails extends Component {
     state = {
         author: '',
         body: '',
+        authorValid: false,
+        bodyValid: false,
+        formValid: false,
+        authorError: '',
+        bodyError: '',
     };
+    formValid = () => {
+        if(this.state.bodyValid && this.state.authorValid){
+            this.setState({formValid: true,})
+        }
+    }
+    validateField = (name, value) => {
+        let formValid = this.state.formValid;
+        if (value.length >= 2){
+            this.setState({[`${name}Valid`]: true, [`${name}Error`]: ''}, () => {this.formValid()})
+        }
+    }
     handleOnChange = name => event => {
         const target = event.target;
         const value = target.value;
         this.setState({
             [name]: value,
-        });
+        }, () => {this.validateField(name, value)});
     }
     handleSubmit = () => {
         const { createCommentPost, id, fetchPost } = this.props;
-        createCommentPost(this.state, id );
-        fetchPost(id);
-        this.setState({
-            author: '',
-            body: '',
-        });
+        const {authorValid, bodyValid } = this.state;
+        if(this.state.formValid){
+            createCommentPost(this.state, id );
+            fetchPost(id);
+            this.setState({
+                author: '',
+                body: '',
+                formValid: false,
+                authorValid: false,
+                bodyValid: false,
+            });
+        }else{
+            if(!authorValid){
+                this.setState({
+                    authorError: 'This Field is required',
+                   })
+            }if (!bodyValid) {
+                this.setState({
+                    bodyError: 'This Field is required',
+                   })  
+            }
+        }
     }
     handleDel = (postId) => {
         const { deletePost, goBack } = this.props;
         deletePost(postId);
         goBack();
-
     }
     render() {
         const { allIds, byId, } = this.props.posts;
@@ -92,6 +123,7 @@ class PostDetails extends Component {
                             onChange={this.handleOnChange('author')}
                             value={this.state.author}
                             name="author"
+                            errorText={this.state.authorError}
                         />
                         <br />
                         <TextField
@@ -99,6 +131,7 @@ class PostDetails extends Component {
                             onChange={this.handleOnChange('body')}
                             value={this.state.body}
                             name="body"
+                            errorText={this.state.bodyError}
                         />
                         <RaisedButton label="Add" primary={true} onClick={() => this.handleSubmit()}/>
                     </form>

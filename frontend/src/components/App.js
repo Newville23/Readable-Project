@@ -36,7 +36,6 @@ class App extends Component {
               <Route exact path="/:category/:postId" component={PostShow}/>
               <Route exact path="/:category" component={Category}/>
               <Route component={NoMatch}/>
-
             </Switch>
             <Link to="/new-post">
               <FloatingActionButton className="create-post-btn">

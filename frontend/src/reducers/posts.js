@@ -26,6 +26,7 @@ const postNormalization = (state, action) => {
         byId: postById,
         allIds: postAllIds,
         loading: false,
+        error: null,
     }
 }
 
@@ -67,6 +68,7 @@ const posts = ( state = INITIAL_STATE, action ) => {
         case FETCH_POST_SUCCESS:
             return {
                 ...state,
+                error: null,
                 loading: false,
                 byId: {
                     [payload.id]: {

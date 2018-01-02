@@ -44,12 +44,6 @@ export const VOTE_POST_RESET = 'VOTE_POST_RESET'
 
 const ERROR_MESSAGE = 'Sorry! we could not finished the action try again'
 
-function handleError(response, type, dispatch) {
-    if (!response.ok) {
-        dispatch({type});
-    }
-    return response;
-}
 //Posts Category
 export function getPostsCategory(category) {
     const request = ReadableAPI.fetchCategoryPosts(category)

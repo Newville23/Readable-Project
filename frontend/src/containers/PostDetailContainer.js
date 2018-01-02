@@ -14,20 +14,28 @@ class PostDetailContainer extends Component {
     }
 
     render () {
-        const {error} = this.props.posts;
+        const {error, allIds} = this.props.posts;
+        console.log(allIds.length)
         return(
             <div>   
                 { error ? (
                     <NoMatch/>
                 ) : (
                     <div>
-                        <PostDetails {...this.props}/> 
-                        <CommentList 
-                            comments={this.props.comments} 
-                            deleteComment={this.props.deleteCommentPost} 
-                            voteComment={this.props.voteCommentPost}
-                            {...this.props}
-                        />
+                        { allIds[0] ? (
+                            <div>
+                                <PostDetails {...this.props}/> 
+                                <CommentList 
+                                    comments={this.props.comments} 
+                                    deleteComment={this.props.deleteCommentPost} 
+                                    voteComment={this.props.voteCommentPost}
+                                    {...this.props}
+                                />
+                            </div>
+                        ) : (
+                            <NoMatch/>
+                        )
+                        }
                     </div>
                 )
                 }

@@ -27,7 +27,26 @@ class PostForm extends Component {
         author: '',
         category: 'react',
         body: '',
+        formValid: false,
+        titleValid: false,
+        authorValid: false,
+        bodyValid: false,
+        titleError: '',
+        authorError: '',
+        bodyError: '',
     };
+    //Validate the state of all fields in the form  
+    formValid = () => {
+        if(this.state.bodyValid && this.state.authorValid && this.state.titleValid){
+            this.setState({formValid: true,})
+        }
+    } 
+    // Validate each Field in the form 
+    validateField = (name, value) => {
+        if (value.length >= 2 && name !== 'category') {
+            this.setState({[`${name}Valid`]: true, [`${name}Error`]: ''}, () => {this.formValid()});
+        }
+    }
 
     handleOnChange = name => event => {
         const target = event.target;
@@ -40,11 +59,33 @@ class PostForm extends Component {
         })();
         this.setState({
             [name]: value,
-        });
+        }, () => {this.validateField(name, value)});
     }
+
     handleSubmit = () => {
-        const { createPost } = this.props;
-        createPost(this.state);
+        const { createPost, push } = this.props;
+        const {authorValid, bodyValid, titleValid, formValid } = this.state;
+        if(formValid){
+            createPost(this.state);
+            push('/');
+        }else{
+            if(!authorValid){
+                this.setState({
+                    authorError: 'This Field is required',
+                   })
+            }if (!bodyValid) {
+                this.setState({
+                    bodyError: 'This Field is required',
+                   })  
+            }
+            if(!titleValid){
+                this.setState({
+                    titleError: 'This Field is required',
+                   })
+            }
+        }
+
+    
     }
     render() {
         return (
@@ -55,6 +96,7 @@ class PostForm extends Component {
                         onChange={this.handleOnChange('title')}
                         value={this.state.title}
                         name="title"
+                        errorText={this.state.titleError}
                     />
                     <br />
                     <TextField
@@ -62,6 +104,7 @@ class PostForm extends Component {
                         onChange={this.handleOnChange('author')}
                         value={this.state.author}
                         name="author"
+                        errorText={this.state.authorError}
                     />
                     <br />
                     <span>Add a category </span>  
@@ -78,12 +121,11 @@ class PostForm extends Component {
                         onChange={this.handleOnChange('body')}
                         value={this.state.body}
                         name="body"
+                        errorText={this.state.bodyError}
                     />
                     <br/>
                     <div>
-                        <Link to="/" onClick={() => this.handleSubmit()}>
-                            <RaisedButton className="btn-add-post" label="Add" primary={true} />
-                        </Link>
+                        <RaisedButton className="btn-add-post" label="Add" primary={true} onClick={() => this.handleSubmit()}/>
                         <RaisedButton className="btn-add-post"  label="Cancel" primary={true} onClick={() => this.props.goBack()} />
                     </div>
 

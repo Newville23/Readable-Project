@@ -27,7 +27,6 @@ class PostDetails extends Component {
         }
     }
     validateField = (name, value) => {
-        let formValid = this.state.formValid;
         if (value.length >= 2){
             this.setState({[`${name}Valid`]: true, [`${name}Error`]: ''}, () => {this.formValid()})
         }
@@ -41,8 +40,8 @@ class PostDetails extends Component {
     }
     handleSubmit = () => {
         const { createCommentPost, id, fetchPost } = this.props;
-        const {authorValid, bodyValid } = this.state;
-        if(this.state.formValid){
+        const {authorValid, bodyValid, formValid } = this.state;
+        if(formValid){
             createCommentPost(this.state, id );
             fetchPost(id);
             this.setState({

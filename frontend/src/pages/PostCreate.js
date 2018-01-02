@@ -9,7 +9,7 @@ class PostCreate extends Component {
             <div className="container">
                 <h1 className="page-title" > <span className="page-sub"> Add Post</span></h1> 
                 <CategoryList/>
-                <PostFormContainer goBack={history.goBack}/>
+                <PostFormContainer goBack={history.goBack} push= {history.push}/>
             </div>
         )
     }
